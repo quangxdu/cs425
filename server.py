@@ -13,8 +13,8 @@ maxdelay = 3
 
 random.randint(0,maxdelay)
 
-def returnTime()
+def returnTime():
 	return datetime.datetime.now();
-def delayTime()
+def delayTime():
 	return datetime.datetime.now() + datetime.timedelta(seconds = random.uniform(0,maxdelay));
 
