@@ -31,6 +31,3 @@ class Client:
         s.send(packet.message)
         s.close()
         
-    
-    my_thread = threading.Thread(target=listenTerminal)
-    my_thread.start()

@@ -11,6 +11,9 @@ import datetime;
 
 maxdelay = 3
 
+def update(self):
+	pass 			#Code for listening to a port
+
 random.randint(0,maxdelay)
 
 def returnTime():
