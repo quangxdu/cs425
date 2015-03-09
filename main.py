@@ -7,9 +7,22 @@ import server
 import client
 import threading
 
-myClient = client()
-myServer = server()
+def myClient:
+	#setup connection to other 3 servers
+	#while loop asking for packet info to send
+	#create packet
+	#insert into tail of queue with random delay
+	return
 
+def myServer:
+	#setup connections to other 3 clients
+	#while loop receiving packet info
+	return
+def	
+def myQueue:
+	#check time, if head's packet time < currentTime send and inc head
+	return
+	
 t = threading.Thread(target=myClient.listenTerminal)
 t.daemon = True
 t.start()
@@ -17,4 +30,8 @@ t.start()
 c = threading.Thread(target=myServer.update)
 c.daemon = True
 c.start()
+
+q = threading.Thread(target=myQueue.sendPacket)
+q.daemon = True
+q.start()
 
