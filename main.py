@@ -8,11 +8,9 @@ import client
 import threading
 import queue
 
-<<<<<<< HEAD
-q = Queue.Queue();
 
-=======
->>>>>>> ef72e70f4b41675f7b2949a043ffcace386ff51a
+
+
 def myClient():
 	#setup connection to other 3 servers
 	#while loop asking for packet info to send

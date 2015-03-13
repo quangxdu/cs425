@@ -6,7 +6,7 @@ Indentations are 4 spaces wide
 '''
 #!/usr/bin/env python
 
-import sys, socket, queue
+import sys, socket, queue, datetime, random
 
 #Global variables
 packetQueue = queue()
@@ -27,6 +27,10 @@ class Client:
         packet = PackStruct()
         packet.message = msg
         packet.dest = dest
+		currTime = datetime.datetime.now()
+		packet.time = currTime
+		delay = datetime.timedelta(seconds = random.uniform(0,3))
+		packet.sendTime = currTime + delay
         packetQueue.put(packet)
 
     def sendPacket(self, packet):
