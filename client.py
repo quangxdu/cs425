@@ -17,7 +17,6 @@ class Client:
     
     def __init__(self, inputIP):
         self.ipAddress = inputIP
-        pass
     
     def waitQueue(self):
         #Check top value of queue for matching time
