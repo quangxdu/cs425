@@ -8,15 +8,14 @@ Indentations are 4 spaces wide
 
 import sys, socket, queue
 
-#Global variables
-packetQueue = queue()
-UDP_PORT = 31337
-ipAddress = "0"
-
 class PackStruct:
     pass
 
 class Client:
+    #Object variables
+    packetQueue = queue()
+    ipAddress = "0"
+    
     def __init__(self, inputIP):
         ipAddress = inputIP
         pass

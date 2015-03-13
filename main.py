@@ -3,12 +3,9 @@ Created on Mar 8, 2015
 
 @author: Kevin
 '''
-import server
-import client
-import threading
-import queue
+import server, client, threading, sys
 
-myClient = client();
+myClient = client(sys.argv[1]);
 myServer = server();
 
 t = threading.Thread(target=myClient.waitQueue)
