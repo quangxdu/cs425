@@ -21,7 +21,15 @@ class Client:
     
     def waitQueue(self):
         #Check top value of queue for matching time
-        pass
+		while True:
+			temp = Client.packetQueue.get()
+				while True:
+                    if(temp.sendTime >= datetime.datetime.now()):
+					sendPacket(temp)
+					break;
+                
+				
+			
     
     def addPacket(self, msg, dest):
         packet = PackStruct()
@@ -39,4 +47,4 @@ class Client:
         s.connect(Client.ipAddress, packet.port)
         s.send(packet.message)
         s.close()
-        
+ 
