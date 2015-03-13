@@ -8,8 +8,11 @@ import client
 import threading
 import queue
 
+<<<<<<< HEAD
 q = Queue.Queue();
 
+=======
+>>>>>>> ef72e70f4b41675f7b2949a043ffcace386ff51a
 def myClient():
 	#setup connection to other 3 servers
 	#while loop asking for packet info to send
@@ -36,9 +39,6 @@ c = threading.Thread(target=myServer.update)
 c.daemon = True
 c.start()
 
-q = threading.Thread(target=myQueue.sendPacket)
-q.daemon = True
-q.start()
 
 while True:
 	n = input(what message do you want to send?)
