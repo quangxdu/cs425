@@ -11,15 +11,17 @@ import sys, socket, queue, datetime, random
 #Global variables
 packetQueue = queue()
 UDP_PORT = 31337
+ipAddress = "0"
 
 class PackStruct:
     pass
 
 class Client:
-    def __init__(self):
+    def __init__(self, inputIP):
+        ipAddress = inputIP
         pass
     
-    def listenToTerminal(self):
+    def waitQueue(self):
         #Check top value of queue for matching time
         pass
     
@@ -31,11 +33,13 @@ class Client:
 		packet.time = currTime
 		delay = datetime.timedelta(seconds = random.uniform(0,3))
 		packet.sendTime = currTime + delay
+        packet.port = dest
+
         packetQueue.put(packet)
 
     def sendPacket(self, packet):
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect((packet.dest, UDP_PORT))
+        s.connect((ipAddress, packet.port))
         s.send(packet.message)
         s.close()
         

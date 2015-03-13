@@ -10,7 +10,6 @@ import queue
 
 
 
-
 def myClient():
 	#setup connection to other 3 servers
 	#while loop asking for packet info to send
@@ -30,6 +29,10 @@ def myQueue():
 #loop
 
 t = threading.Thread(target=myClient.listenTerminal)
+myClient = client();
+myServer = server();
+
+t = threading.Thread(target=myClient.waitQueue)
 t.daemon = True
 t.start()
 
@@ -39,9 +42,10 @@ c.start()
 
 
 while True:
-	n = input(what message do you want to send?)
-	if(input == "quit"")
+	n = input('what message do you want to send?')
+	if(input == "quit"):
 		break;
 	message = n.split()
-	if(message[0] ==  "send" &&  message[-1] == "a")
-	myclient.addpacket(n)
+	if(message[0] ==  "send" and  message.len == 3):
+        myClient.addpacket(message[1], message[-1])
+
