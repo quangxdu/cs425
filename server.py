@@ -7,12 +7,16 @@ client multithread- take input and create packets to send to all 3 others
 delay multithread- take created packets and send at correct time
 '''
 
-import datetime, random
+import datetime, random, socket
 
 maxdelay = 3
 
 def update(self):
-	pass 			#Code for listening to a port
+	while True
+		s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		data = s.recv(1024)
+		s.close()
+		print "Received data: ", data, " System time is: ", returnTime();
 
 
 def returnTime():

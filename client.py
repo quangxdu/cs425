@@ -6,7 +6,7 @@ Indentations are 4 spaces wide
 '''
 #!/usr/bin/env python
 
-import sys, socket, queue, datetime, random
+import socket, queue, datetime, random
 
 class PackStruct:
     pass
