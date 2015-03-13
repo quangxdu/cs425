@@ -6,7 +6,7 @@ server multithread- recv from other servers
 client multithread- take input and create packets to send to all 3 others
 delay multithread- take created packets and send at correct time
 '''
-import random;
+
 import datetime;
 
 maxdelay = 3
@@ -14,7 +14,6 @@ maxdelay = 3
 def update(self):
 	pass 			#Code for listening to a port
 
-random.randint(0,maxdelay)
 
 def returnTime():
 	return datetime.datetime.now();
