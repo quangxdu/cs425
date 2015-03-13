@@ -12,12 +12,11 @@ class PackStruct:
     pass
 
 class Client:
-    #Object variables
-    packetQueue = queue()
     ipAddress = "0"
+    packetQueue = queue()
     
     def __init__(self, inputIP):
-        ipAddress = inputIP
+        self.ipAddress = inputIP
         pass
     
     def waitQueue(self):
@@ -28,17 +27,16 @@ class Client:
         packet = PackStruct()
         packet.message = msg
         packet.dest = dest
-		currTime = datetime.datetime.now()
-		packet.time = currTime
-		delay = datetime.timedelta(seconds = random.uniform(0,3))
-		packet.sendTime = currTime + delay
+        currTime = datetime.datetime.now()
+        packet.time = currTime
+        delay = datetime.timedelta(seconds = random.uniform(0,3))
+        packet.sendTime = currTime + delay
         packet.port = dest
-
-        packetQueue.put(packet)
+        Client.packetQueue.put(packet)
 
     def sendPacket(self, packet):
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect((ipAddress, packet.port))
+        s.connect(Client.ipAddress, packet.port)
         s.send(packet.message)
         s.close()
         
