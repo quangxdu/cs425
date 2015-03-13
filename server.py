@@ -12,7 +12,7 @@ import datetime, random, socket
 maxdelay = 3
 
 def update(self):
-	while True
+	while True:
 		s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		data = s.recv(1024)
 		s.close()
