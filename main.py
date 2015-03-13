@@ -6,23 +6,28 @@ Created on Mar 8, 2015
 import server
 import client
 import threading
+import queue
 
-def myClient(self):
+q = Queue.Queue();
+
+def myClient():
 	#setup connection to other 3 servers
 	#while loop asking for packet info to send
 	#create packet
 	#insert into tail of queue with random delay
     pass
 
-def myServer(self):
+def myServer():
 	#setup connections to other 3 clients
 	#while loop receiving packet info
+	#print info
     pass
 
-def myQueue(self):
+def myQueue():
 	#check time, if head's packet time < currentTime send and inc head
     pass
-	
+#loop
+
 t = threading.Thread(target=myClient.listenTerminal)
 t.daemon = True
 t.start()
@@ -35,3 +40,10 @@ q = threading.Thread(target=myQueue.sendPacket)
 q.daemon = True
 q.start()
 
+while True:
+	n = input(what message do you want to send?)
+	if(input == "quit"")
+		break;
+	message = n.split()
+	if(message[0] ==  "send" &&  message[-1] == "a")
+	myclient.addpacket(n)
