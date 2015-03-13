@@ -6,7 +6,7 @@ Indentations are 4 spaces wide
 '''
 #!/usr/bin/env python
 
-import sys, socket, threading
+import sys, socket
 
 class PackStruct:
     pass
