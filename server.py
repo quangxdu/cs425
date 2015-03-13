@@ -7,7 +7,7 @@ client multithread- take input and create packets to send to all 3 others
 delay multithread- take created packets and send at correct time
 '''
 
-import datetime;
+import datetime, random
 
 maxdelay = 3
 
