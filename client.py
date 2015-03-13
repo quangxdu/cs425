@@ -15,14 +15,10 @@ class Client:
     def __init__(self):
         pass
     
-    def listenTerminal(self):
-        if len(sys.argv) is not 3:
-            print "Not enough arguments! Try again!"
-            return False
-    
+    def addPacket(self, msg, dest):
         packet = PackStruct()
-        packet.message = sys.argv[1]
-        packet.dest = sys.argv[2]
+        packet.message = msg
+        packet.dest = dest
 
         UDP_PORT = 31337
 
