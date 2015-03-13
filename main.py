@@ -23,4 +23,4 @@ while True:
         break;
     message = n.split()
     if(message[0] ==  "send" and  message.len == 3):
-        myClient.addPacket(message[1], message[-1])
+        myClient.addPacket(message[1], message[-1])     #Need to modify message[1]

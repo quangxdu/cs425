@@ -6,7 +6,7 @@ Indentations are 4 spaces wide
 '''
 #!/usr/bin/env python
 
-import sys, socket, queue, datetime, random
+import socket, queue, datetime, random
 
 class PackStruct:
     pass
@@ -17,20 +17,17 @@ class Client:
     
     def __init__(self, inputIP):
         self.ipAddress = inputIP
-        pass
-    
+
     def waitQueue(self):
         #Check top value of queue for matching time
-		while True:
-		temp = Client.packetQueue.get()
-			while True:
+        while True:
+            temp = Client.packetQueue.get()
+            while True:
                 if(temp.sendTime >= datetime.datetime.now()):
-                    sendPacket(temp)
+                    Client.sendPacket(temp)
                     break;
                 
-				
-			
-    
+
     def addPacket(self, msg, dest):
         packet = PackStruct()
         packet.message = msg
