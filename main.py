@@ -18,10 +18,9 @@ c.start()
 
 
 while True:
-	n = input('what message do you want to send?')
-	if(input == "quit"):
-		break;
-	message = n.split()
-	if(message[0] ==  "send" and  message.len == 3):
-        myClient.addpacket(message[1], message[-1])
-
+    n = input('what message do you want to send?')
+    if(input == "quit"):
+        break;
+    message = n.split()
+    if(message[0] ==  "send" and  message.len == 3):
+        myClient.addPacket(message[1], message[-1])
