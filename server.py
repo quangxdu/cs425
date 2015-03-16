@@ -21,9 +21,11 @@ class Server:
 	def update(self):
 		while True:
 			s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-			s.connect((self.ipAddress, int(self.port)))
+            server_address = (self.ipAddress,self.port)
+            s.bind(server_address)
+			connection, client_address = s.accept()
 			data = s.recv(1024)
-			s.close()
+			connection.close()
 			sys.stdout.write("Recieved: "+data+", System time is ---\n") #needs currTime
 			message = data.split()
 			if(message[0] == "delete"):
