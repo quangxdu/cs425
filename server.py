@@ -15,17 +15,18 @@ class Server:
 	database = {}
 	port = "0"
 	ipAddress = "0"
+	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+		
 	def __init__(self, inputIP, port):
 		self.ipAddress = inputIP
 		self.port = port
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		server_address = ('localhost', self.port)
-		s.bind(server_address)
-        sock.listen(1)
+		self.s.bind(server_address)
+		self.s.listen(1)
+		
 	def update(self):
 		while True:
-			
-			data, address = s.recvfrom(1024)
+			data, address = self.s.recvfrom(1024)
 			sys.stdout.write("Recieved: "+data+", System time is ---\n") #needs currTime
 			message = data.split()
 			if(message[0] == "delete"):
