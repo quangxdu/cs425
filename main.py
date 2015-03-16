@@ -5,8 +5,8 @@ Created on Mar 8, 2015
 '''
 import server, client, threading, sys
 
-myClient = client(sys.argv[1]);
-myServer = server(sys.argv[1], sys.argv[2]);
+myClient = client.Client(sys.argv[1]);
+myServer = server.Server(sys.argv[1], sys.argv[2]);
 
 t = threading.Thread(target=myClient.waitQueue)
 t.daemon = True
@@ -18,7 +18,7 @@ c.start()
 
 
 while True:
-    n = input('what message do you want to send?')
+    n = input('What message do you want to send? ')
     if(input == "quit"):
         break;
     message = n.split()

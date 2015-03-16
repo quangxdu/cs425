@@ -7,19 +7,24 @@ client multithread- take input and create packets to send to all 3 others
 delay multithread- take created packets and send at correct time
 '''
 
-import datetime, random, socket, client
+import datetime, random, socket, client, sys
 
 maxdelay = 3
 
 class Server:
 	database = {}
-	def update(self, ipAddr, port):
+	port = "0"
+	ipAddress = "0"
+	def __init__(self, inputIP, port):
+		self.ipAddress = inputIP
+		self.port = port
+	def update(self):
 		while True:
 			s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-			s.connect((ipAddr, port))
+			s.connect((self.ipAddress, int(self.port)))
 			data = s.recv(1024)
 			s.close()
-			print 'Received data: ' + data + ' System time is: ' + Server.returnTime()
+			sys.stdout.write("Recieved: "+data+", System time is ---\n") #needs currTime
 			message = data.split()
 			if(message[0] == "delete"):
 				del self.database[message[1]]

@@ -6,14 +6,14 @@ Indentations are 4 spaces wide
 '''
 #!/usr/bin/env python
 
-import socket, queue, datetime, random
+import sys, socket, queue, datetime, random
 
 class PackStruct:
     pass
 
 class Client:
     ipAddress = "0"
-    packetQueue = queue()
+    packetQueue = queue.Queue()
     
     def __init__(self, inputIP):
         self.ipAddress = inputIP
@@ -37,7 +37,7 @@ class Client:
         delay = datetime.timedelta(seconds = random.uniform(0,3))
         packet.sendTime = currTime + delay
         packet.port = dest
-        print('Sent ' + msg + ' to ' + dest + ', System time is' + currTime)
+        sys.stdout.write("Sent: "+msg+" to "+dest+", System time is ---\n") #needs currTime
         Client.packetQueue.put(packet)
 
     def sendPacket(self, packet):
