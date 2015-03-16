@@ -13,7 +13,7 @@ class PackStruct:
 
 class Client:
     ipAddress = "0"
-    packetQueue = queue.Queue(0)
+    packetQueue = Queue.Queue(0)
     
     def __init__(self, inputIP):
         self.ipAddress = inputIP
