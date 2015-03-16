@@ -21,7 +21,7 @@ class Server:
 	def update(self):
 		while True:
 			s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-			server_address = (self.ipAddress, self.port)
+			server_address = ('localhost', self.port)
 			s.bind(server_address)
 			connection, client_address = s.accept()
 			data = s.recv(1024)
