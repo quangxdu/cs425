@@ -18,7 +18,7 @@ t.start()
 
 
 while True:
-    n = input('What message do you want to send? ')
+    n = raw_input('What message do you want to send? ')
     message = n.split()
     if len(message) > 0:
         if(message[0] ==  "send"):
