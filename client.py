@@ -40,7 +40,7 @@ class Client:
         sys.stdout.write("Sent: "+msg+" to "+str(dest)+", System time is ---\n") #needs currTime
         Client.packetQueue.put(packet)
 
-    def sendPacket(self, packet):
+    def sendPacket(packet):
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect(Client.ipAddress, packet.port)
         s.send(packet.message)
