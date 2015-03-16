@@ -8,19 +8,29 @@ Indentations are 4 spaces wide
 
 import sys, socket, Queue, datetime, random
 
+class PackStruct:
+    pass
 
 class Client:
-    class PackStruct:
-        pass
 
     ipAddress = "0"
     packetQueue = Queue.Queue(0)
     
     def __init__(self, inputIP):
         self.ipAddress = inputIP
-                
+
+    def waitQueue(self):
+        #Check top value of queue for matching time
+        while True:
+            temp = PackStruct()
+            temp = Client.packetQueue.get()
+            while True:
+                if(temp.sendTime >= datetime.datetime.now()):
+                    Client.sendPacket(temp)
+                    break;
+
     def addPacket(self, msg, dest):
-        packet = self.PackStruct()
+        packet = PackStruct()
         packet.message = msg
         packet.dest = dest
         currTime = datetime.datetime.now()
@@ -37,11 +47,3 @@ class Client:
         s.send(packet.message)
         s.close()
  
-    def waitQueue(self):
-        #Check top value of queue for matching time
-        while True:
-            temp = Client.packetQueue.get()
-            while True:
-                if(temp.sendTime >= datetime.datetime.now()):
-                    Client.sendPacket(temp)
-                    break;
