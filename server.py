@@ -22,7 +22,6 @@ class Server:
 		self.port = port
 		server_address = (self.ipAddress, int(self.port))
 		self.s.bind(server_address)
-		self.s.listen(1)
 		
 	def update(self):
 		while True:
