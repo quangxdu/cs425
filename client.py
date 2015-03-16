@@ -18,17 +18,7 @@ class Client:
     
     def __init__(self, inputIP):
         self.ipAddress = inputIP
-
-    def waitQueue(self):
-        #Check top value of queue for matching time
-        while True:
-            temp = Client.packetQueue.get()
-            while True:
-                if(temp.sendTime >= datetime.datetime.now()):
-                    Client.sendPacket(temp)
-                    break;
                 
-
     def addPacket(self, msg, dest):
         packet = self.PackStruct()
         packet.message = msg
@@ -47,3 +37,11 @@ class Client:
         s.send(packet.message)
         s.close()
  
+    def waitQueue(self):
+        #Check top value of queue for matching time
+        while True:
+            temp = Client.packetQueue.get()
+            while True:
+                if(temp.sendTime >= datetime.datetime.now()):
+                    Client.sendPacket(temp)
+                    break;
