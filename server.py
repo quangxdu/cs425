@@ -19,7 +19,7 @@ class Server:
 			s.connect((ipAddr, port))
 			data = s.recv(1024)
 			s.close()
-			print "Received data: ", data, " System time is: ", Server.returnTime()
+			print "Received data: " + data + " System time is: " + Server.returnTime()
 			message = data.split()
 			if(message[0] == "delete"):
 				del self.database[message[1]]

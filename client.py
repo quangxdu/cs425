@@ -37,7 +37,7 @@ class Client:
         delay = datetime.timedelta(seconds = random.uniform(0,3))
         packet.sendTime = currTime + delay
         packet.port = dest
-        print("Sent ", msg, " to ", dest, ", System time is", currTime)
+        print("Sent " + msg + " to " + dest + ", System time is" + currTime)
         Client.packetQueue.put(packet)
 
     def sendPacket(self, packet):
