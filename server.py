@@ -13,9 +13,10 @@ maxdelay = 3
 
 class Server:
 	database = {}
-	def update(self):
+	def update(self, ipAddr, port):
 		while True:
 			s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+			s.connect((ipAddr, port))
 			data = s.recv(1024)
 			s.close()
 			print "Received data: ", data, " System time is: ", Server.returnTime()
