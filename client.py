@@ -24,7 +24,7 @@ class Client:
             temp = Client.packetQueue.get()
             while True:
                 if(temp.sendTime >= datetime.datetime.now()):
-                    Client.sendPacket(temp)
+                    Client.sendPacket(self.temp)
                     break;
                 
 
