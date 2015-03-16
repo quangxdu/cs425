@@ -18,14 +18,14 @@ class Server:
 	def __init__(self, inputIP, port):
 		self.ipAddress = inputIP
 		self.port = port
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+		server_address = ('localhost', self.port)
+		s.bind(server_address)
+        sock.listen(1)
 	def update(self):
 		while True:
-			s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-			server_address = ('localhost', self.port)
-			s.bind(server_address)
-			connection, client_address = s.accept()
-			data = s.recv(1024)
-			connection.close()
+			
+			data, address = s.recvfrom(1024)
 			sys.stdout.write("Recieved: "+data+", System time is ---\n") #needs currTime
 			message = data.split()
 			if(message[0] == "delete"):
