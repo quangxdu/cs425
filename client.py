@@ -6,14 +6,14 @@ Indentations are 4 spaces wide
 '''
 #!/usr/bin/env python
 
-import sys, socket, queue, datetime, random
+import sys, socket, Queue, datetime, random
 
 class PackStruct:
     pass
 
 class Client:
     ipAddress = "0"
-    packetQueue = queue.Queue()
+    packetQueue = Queue.Queue(0)
     
     def __init__(self, inputIP):
         self.ipAddress = inputIP
