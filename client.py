@@ -40,6 +40,6 @@ class Client:
         delay = datetime.timedelta(seconds = random.uniform(0,3))
         packet.sendTime = currTime + delay
         packet.port = dest
-        sys.stdout.write("Sent: "+msg+" to "+str(dest)+", System time is ---\n") #needs currTime
+        sys.stdout.write("Sent: "+msg+" to "+str(dest)+", System time is +" +currTime.ctime()+"\n")
         Client.packetQueue.put(packet)
  

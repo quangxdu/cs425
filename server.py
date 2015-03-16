@@ -26,7 +26,8 @@ class Server:
 	def update(self):
 		while True:
 			data, address = self.s.recvfrom(1024)
-			sys.stdout.write("Recieved: "+data+", System time is ---\n") #needs currTime
+			currTime = datetime.datetime.now()
+			sys.stdout.write("Received: "+data+", System time is "+currTime.ctime()+"\n") #needs currTime
 			message = data.split()
 			if(message[0] == "delete"):
 				del self.database[message[1]]
