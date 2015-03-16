@@ -29,7 +29,7 @@ class Client:
             temp = Client.packetQueue.get()
             while True:
                 if(temp.sendTime >= datetime.datetime.now()):
-                    temp.sendPacket(self.ipAddress, temp.dest, temp.msg)
+                    temp.sendPacket(self.ipAddress, temp.dest, temp.message)
                     break;
 
     def addPacket(self, msg, dest):
