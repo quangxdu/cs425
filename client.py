@@ -11,8 +11,7 @@ import sys, socket, Queue, datetime, random
 class PackStruct:
     def sendPacket(self, ipAddress, port, message):
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(ipAddress, port)
-        s.send(message)
+        s.sendto(message, (ipAddress, port))
         s.close()
 
 class Client:
