@@ -8,10 +8,11 @@ Indentations are 4 spaces wide
 
 import sys, socket, Queue, datetime, random
 
-class PackStruct:
-    pass
 
 class Client:
+    class PackStruct:
+        pass
+
     ipAddress = "0"
     packetQueue = Queue.Queue(0)
     
@@ -29,7 +30,7 @@ class Client:
                 
 
     def addPacket(self, msg, dest):
-        packet = PackStruct()
+        packet = self.PackStruct()
         packet.message = msg
         packet.dest = dest
         currTime = datetime.datetime.now()
@@ -40,7 +41,7 @@ class Client:
         sys.stdout.write("Sent: "+msg+" to "+str(dest)+", System time is ---\n") #needs currTime
         Client.packetQueue.put(packet)
 
-    def sendPacket(packet):
+    def sendPacket(self, packet):
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect(Client.ipAddress, packet.port)
         s.send(packet.message)
