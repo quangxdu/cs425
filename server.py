@@ -27,7 +27,7 @@ class Server:
 		while True:
 			data, address = self.s.recvfrom(1024)
 			currTime = datetime.datetime.now()
-			sys.stdout.write("Received: "+data+", System time is "+currTime.ctime()+"\n") #needs currTime
+			sys.stdout.write("Received: "+data+", System time is "+currTime.ctime()+" (Max Delay is 3 seconds)\n") #needs currTime
 			message = data.split()
 			if(message[0] == "delete"):
 				del self.database[message[1]]
