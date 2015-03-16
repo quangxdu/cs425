@@ -20,7 +20,7 @@ class Server:
 	def __init__(self, inputIP, port):
 		self.ipAddress = inputIP
 		self.port = port
-		server_address = ('localhost', self.port)
+		server_address = (self.ipAddress, int(self.port))
 		self.s.bind(server_address)
 		self.s.listen(1)
 		
