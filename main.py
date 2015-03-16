@@ -5,23 +5,24 @@ Created on Mar 8, 2015
 '''
 import server, client, threading, sys
 
-myClient = client.Client(sys.argv[1]);
 myServer = server.Server(sys.argv[1], sys.argv[2]);
-
-t = threading.Thread(target=myClient.waitQueue)
-t.daemon = True
-t.start()
-
 c = threading.Thread(target=myServer.update)
 c.daemon = True
 c.start()
 
 
+myClient = client.Client(sys.argv[1]);
+t = threading.Thread(target=myClient.waitQueue)
+t.daemon = True
+t.start()
+
+
 while True:
     n = input('What message do you want to send? ')
-    if(input == "quit"):
-        break;
     message = n.split()
-    if(message[0] ==  "send" and  message.len == 3):
-        myClient.addPacket(message[1], message[-1])     #Need to modify message[1]
+    if len(message) > 0:
+        if(message[0] ==  "send"):
+            myClient.addPacket(message[1], int(message[-1]))
+        elif(message[0] == "quit"):
+            sys.exit();     #Need to modify message[1]
 
