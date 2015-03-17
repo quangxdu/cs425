@@ -51,7 +51,7 @@ def sendMsg():
                 temp.sendPacket(ipAddress, 5003, temp.message)
                 ack[1], ack[2], ack[3], ack[4] = "1"
 
-def addPacket(self, msg, address):
+def addPacket(msg, address):
     packet = PackStruct()
     packet.message = msg
     packet.address = address
