@@ -79,7 +79,7 @@ while True:
     n = raw_input('Type quit to exit/n')
     msg = n.split()
     if len(msg) > 0:
-        elif(msg[0] == "quit"):
+        if(msg[0] == "quit"):
             myClient.quit()
             s.close()
             sys.exit()
