@@ -8,6 +8,7 @@ Created on Mar 8, 2015
 #>> python central.py 192.168.101.70
 import server, client, threading, sys, socket, Queue
 global ACKi
+ACKi = 0
 
 class PackStruct:
     def sendPacket(self, ipAddress, port, message):
@@ -63,7 +64,6 @@ def addPacket(msg, address):
     packetQueue.put(packet)
     
 
-ACKi = 0
 data = "0"
 
 packetQueue = Queue.Queue(0)
