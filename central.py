@@ -7,7 +7,7 @@ Created on Mar 8, 2015
 #Example:
 #>> python central.py 192.168.101.70
 import server, client, threading, sys, socket, Queue
-from curses.ascii import ACK
+global ACKi
 
 class PackStruct:
     def sendPacket(self, ipAddress, port, message):
@@ -25,7 +25,7 @@ def masterListen():
         
         message = data.split()
         if(message[0] is "ack"):
-            ACK = ACK-1
+            ACKi = ACKi-1
         #Check if command is delete
         elif(message[0] == "delete"):
             #Send delete signal to each server
@@ -41,20 +41,20 @@ def masterListen():
 def sendMsg():
     while True:
     #Check top value of queue for matching time
-        if(ACK <= 0):
+        if(ACKi <= 0):
             temp = packetQueue.get()
             n = temp.message.split()
             if(n[0] == "get" and n[-1] == "1"):
                 temp.sendPacket(ipAddress, temp.addresss, temp.message)
-                ACK = 1
+                ACKi = 1
             elif(n[0] == "get" and n[-1] == "2"):
-                ACK = 0
+                ACKi = 0
             else:
                 temp.sendPacket(ipAddress, 5000, temp.message)
                 temp.sendPacket(ipAddress, 5001, temp.message)
                 temp.sendPacket(ipAddress, 5002, temp.message)
                 temp.sendPacket(ipAddress, 5003, temp.message)
-                ACK = 4
+                ACKi = 4
 
 def addPacket(msg, address):
     packet = PackStruct()
@@ -62,8 +62,8 @@ def addPacket(msg, address):
     packet.address = address
     packetQueue.put(packet)
     
-global ACK
-ACK = 4
+
+ACKi = 0
 data = "0"
 
 packetQueue = Queue.Queue(0)
