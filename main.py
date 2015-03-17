@@ -34,7 +34,7 @@ while True:
         elif(message[0] == "q"):
             myServer.quit()
             sys.exit()
-        elif((message[0] == "get") and (message[-1] == 2)):
+        elif((message[0] == "get") and (message[-1] is 2)):
             sys.stdout.write(myServer.returnValue(message[2]))
         elif(message[0] =="show-all"):
             for x in myServer.database:
