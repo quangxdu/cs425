@@ -5,8 +5,9 @@ Created on Mar 8, 2015
 '''
 import server, client, threading, sys
 
-myServer = server.Server(sys.argv[1], sys.argv[2]);
+database = {}
 
+myServer = server.Server(sys.argv[1], sys.argv[2]);
 c = threading.Thread(target=myServer.update)
 c.daemon = True
 c.start()
@@ -26,4 +27,12 @@ while True:
             myClient.addPacket(message[1], int(message[-1]))
         elif(message[0] == "quit"):
             sys.exit();     #Need to modify message[1]
+        elif(message[0] == "delete"):
+            del database[message[1]]
+        elif(message[0] == "get"):
+            value = database[message[1]]
+            myClient.addPacket(message[1], message[2])
+        elif(message[0] == "insert" or message[0] == "update"):
+            database[message[1]] = message[2]
+            #Some method to update other servers
 

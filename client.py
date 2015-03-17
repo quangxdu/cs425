@@ -15,7 +15,6 @@ class PackStruct:
         s.close()
 
 class Client:
-
     ipAddress = "0"
     packetQueue = Queue.Queue(0)
     
