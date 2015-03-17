@@ -16,6 +16,7 @@ class Server:
 	port = "0"
 	ipAddress = "0"
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+	client
 		
 	def __init__(self, inputIP, port):
 		self.ipAddress = inputIP
@@ -33,10 +34,12 @@ class Server:
 				del self.database[message[1]]
 			elif(message[0] == "get"):
 				value = self.database[message[1]]
-				#Some method to send out return message
+				self.client.addPacket(value, address)
 			elif(message[0] == "insert" or message[0] == "update"):
 				self.database[message[1]] = message[2]
 				#Some method to update other servers
+	def setClient(self, client):
+		self.client = client
 	def returnTime(self):
 		return datetime.datetime.now();
 	def delayTime(self):

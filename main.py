@@ -6,16 +6,17 @@ Created on Mar 8, 2015
 import server, client, threading, sys
 
 myServer = server.Server(sys.argv[1], sys.argv[2]);
+
 c = threading.Thread(target=myServer.update)
 c.daemon = True
 c.start()
-
 
 myClient = client.Client(sys.argv[1]);
 t = threading.Thread(target=myClient.waitQueue)
 t.daemon = True
 t.start()
 
+myServer.getClient(myClient)
 
 while True:
     n = raw_input('What message do you want to send? ')
