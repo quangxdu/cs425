@@ -23,7 +23,7 @@ def masterListen():
         sys.stdout.write("Received: "+data+", ack is "+str(ack[1])+"\n")
         
         message = data.split()
-        if(message[0] is "ack"):
+        if(message[0] == "ack"):
             ack[1] = ack[1]-1
         #Check if command is delete
         elif(message[0] == "delete"):
