@@ -7,8 +7,6 @@ Created on Mar 8, 2015
 #Example:
 #>> python central.py 192.168.101.70
 import server, client, threading, sys, socket, Queue
-global ACKi
-ACKi = 0
 
 class PackStruct:
     def sendPacket(self, ipAddress, port, message):
@@ -22,11 +20,11 @@ class PackStruct:
 def masterListen():
     while True:
         data, address = s.recvfrom(1024)
-        sys.stdout.write("Received: "+data+"\n")
+        sys.stdout.write("Received: "+data+" from "+str(address[0])+"\n")
         
         message = data.split()
         if(message[0] is "ack"):
-            ACKi = ACKi-1
+            ack[1] = ack[1]-1
         #Check if command is delete
         elif(message[0] == "delete"):
             #Send delete signal to each server
@@ -42,20 +40,20 @@ def masterListen():
 def sendMsg():
     while True:
     #Check top value of queue for matching time
-        if(ACKi <= 0):
+        if(ack[1] <= 0):
             temp = packetQueue.get()
             n = temp.message.split()
             if(n[0] == "get" and n[-1] == "1"):
                 temp.sendPacket(ipAddress, temp.addresss, temp.message)
-                ACKi = 1
+                ack[1] = 1
             elif(n[0] == "get" and n[-1] == "2"):
-                ACKi = 0
+                ack[1] = 0
             else:
                 temp.sendPacket(ipAddress, 5000, temp.message)
                 temp.sendPacket(ipAddress, 5001, temp.message)
                 temp.sendPacket(ipAddress, 5002, temp.message)
                 temp.sendPacket(ipAddress, 5003, temp.message)
-                ACKi = 4
+                ack[1] = 4
 
 def addPacket(msg, address):
     packet = PackStruct()
@@ -63,8 +61,9 @@ def addPacket(msg, address):
     packet.address = address
     packetQueue.put(packet)
     
-
 data = "0"
+ack = { 1: 0
+}
 
 packetQueue = Queue.Queue(0)
 
