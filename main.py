@@ -38,7 +38,7 @@ while True:
             sys.stdout.write(myServer.returnValue(message[1])+"\n")
         elif(message[0] =="show-all"):
             for x in myServer.database:
-                print x+": "+myServer.returnVaue(x)+" \n"
+                print x+": "+myServer.returnValue(x)+" \n"
         elif(message[0] == "delay"):
             myClient.addPacket(message[1], 5555,1)
         else:
