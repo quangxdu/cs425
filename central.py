@@ -87,7 +87,6 @@ while True:
     msg = n.split()
     if len(msg) > 0:
         if(msg[0] == "quit"):
-            myClient.quit()
             s.close()
             sys.exit()
  
