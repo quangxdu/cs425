@@ -17,14 +17,14 @@ class PackStruct:
 #This function loops and listens to port 5005 for commands
 #and then passes it to one of the consistency functions to
 #send out the messages in the correct order 
-def masterListen():
+def masterListen(self):
     while True:
         data, address = s.recvfrom(1024)
-        sys.stdout.write("Received: "+data+" from "+str(address[0])+"\n")
+        sys.stdout.write("Received: "+data+"\n")
         
         message = data.split()
         if(message[0] is "ack"):
-            ack = ack-1
+            self.ack = self.ack-1
         #Check if command is delete
         elif(message[0] == "delete"):
             #Send delete signal to each server
@@ -37,7 +37,7 @@ def masterListen():
         else:
             addPacket(data, address)
     
-def sendMsg():
+def sendMsg(self):
     while True:
     #Check top value of queue for matching time
         if(ack <= 0):
@@ -45,15 +45,15 @@ def sendMsg():
             n = temp.message.split()
             if(n[0] == "get" and n[-1] == "1"):
                 temp.sendPacket(ipAddress, temp.addresss, temp.message)
-                ack = 1
+                self.ack = 1
             elif(n[0] == "get" and n[-1] == "2"):
-                ack = 0
+                self.ack = 0
             else:
                 temp.sendPacket(ipAddress, 5000, temp.message)
                 temp.sendPacket(ipAddress, 5001, temp.message)
                 temp.sendPacket(ipAddress, 5002, temp.message)
                 temp.sendPacket(ipAddress, 5003, temp.message)
-                ack = 4
+                self.ack = 4
 
 def addPacket(msg, address):
     packet = PackStruct()
