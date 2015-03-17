@@ -86,7 +86,7 @@ while True:
     n = raw_input('Type quit to exit\n')
     msg = n.split()
     if len(msg) > 0:
-        if(msg[0] == "quit"):
+        if(msg[0] == "q"):
             s.close()
             sys.exit()
  

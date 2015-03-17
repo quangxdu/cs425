@@ -35,15 +35,16 @@ class Server:
 		while True:
 			data, address = self.s.recvfrom(1024)
 			currTime = datetime.datetime.now()
-			sys.stdout.write("Received: "+data+", System time is "+currTime.ctime()+" (Max Delay is 3 seconds)\n")
 			message = data.split()
 			#Perform operations
 			if message[0] is "delete":
 				del self.database[message[1]]
 			elif message[0] is "insert" or message[0] is "update":
+				sys.stdout.write("Received: "+data+", System time is "+currTime.ctime()+" (Max Delay is 3 seconds)\n")
 				self.database[message[1]] = message[2]
 				self.client.addPacket("ack", 5005)
 			elif message[0] is "get":
+				sys.stdout.write("Received: "+data+", System time is "+currTime.ctime()+" (Max Delay is 3 seconds)\n")
 				sys.stdout.write("Get: "+self.database[message[1]]+"\n")
 				self.client.addPacket("ack", 5005)
 	

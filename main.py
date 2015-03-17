@@ -26,12 +26,12 @@ myServer.setClient(myClient)
 
 #Continually loop and listen to the terminal
 while True:
-    n = raw_input('What message do you want to send? ')
+    n = raw_input('What message do you want to send? \n')
     message = n.split()
     if len(message) > 0:
         if(message[0] ==  "send"):
             myClient.addPacket(message[1], int(message[-1]))
-        elif(message[0] == "quit"):
+        elif(message[0] == "q"):
             myClient.quit()
             myServer.quit()
             sys.exit()
