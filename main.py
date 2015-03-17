@@ -3,6 +3,9 @@ Created on Mar 8, 2015
 
 @author: Kevin
 '''
+#Main should be called with the IP Address of the local host and the port it listens to
+#Example:
+#>> python main.py 192.168.101.70 5000
 import server, client, threading, sys
 
 #Create a new server and make a new thread to
