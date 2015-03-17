@@ -12,9 +12,11 @@ import datetime, random, socket, client, sys
 maxdelay = 3
 
 class Server:
+	database = {}
 	port = "0"
 	ipAddress = "0"
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+	client
 		
 	def __init__(self, inputIP, port):
 		self.ipAddress = inputIP
@@ -27,6 +29,17 @@ class Server:
 			data, address = self.s.recvfrom(1024)
 			currTime = datetime.datetime.now()
 			sys.stdout.write("Received: "+data+", System time is "+currTime.ctime()+" (Max Delay is 3 seconds)\n") #needs currTime
+			message = data.split()
+			if(message[0] == "delete"):
+				del self.database[message[1]]
+			elif(message[0] == "get"):
+				value = self.database[message[1]]
+				self.client.addPacket(value, address[1])
+			elif(message[0] == "insert" or message[0] == "update"):
+				self.database[message[1]] = message[2]
+				#Some method to update other servers
+	def getClient(self, client):
+		self.client = client
 	def returnTime(self):
 		return datetime.datetime.now();
 	def delayTime(self):

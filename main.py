@@ -5,8 +5,6 @@ Created on Mar 8, 2015
 '''
 import server, client, threading, sys
 
-database = {}
-
 myServer = server.Server(sys.argv[1], sys.argv[2]);
 c = threading.Thread(target=myServer.update)
 c.daemon = True
