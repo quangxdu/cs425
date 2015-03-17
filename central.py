@@ -20,7 +20,7 @@ class PackStruct:
 def masterListen():
     while True:
         data, address = s.recvfrom(1024)
-        sys.stdout.write("Received: "+data+" from "+str(address[2])+"\n")
+        sys.stdout.write("Received: "+data+" from "+str(address[0])+"\n")
         
         message = data.split()
         if(message[0] is "ack"):
