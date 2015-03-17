@@ -52,5 +52,5 @@ class Server:
 		return datetime.datetime.now() + datetime.timedelta(seconds = random.uniform(0,maxdelay));
 	#Cleanup function that is called at the end of main to close sockets
 	def quit(self):
-		self.s.quit()
+		self.s.close()
 
