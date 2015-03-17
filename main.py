@@ -32,7 +32,6 @@ while True:
         if(message[0] ==  "send"):
             myClient.addPacket(message[1], int(message[-1]))
         elif(message[0] == "q"):
-            myClient.quit()
             myServer.quit()
             sys.exit()
         elif(message[0] == "get" and message[-1] == 2):

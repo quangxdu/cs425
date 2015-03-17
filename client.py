@@ -52,8 +52,4 @@ class Client:
         packet.sendTime = currTime + datetime.timedelta(seconds=randtemp)
         sys.stdout.write("Sent: "+msg+" to "+str(dest)+", System time is +" +currTime.ctime()+"\n")
         Client.packetQueue.put(packet)
- 
-    #Cleanup function called at the very end of main when the
-    #program quits
-    def quit(self):
-        self.s.close()
+
