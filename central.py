@@ -44,18 +44,11 @@ def sendMsg():
     #Check top value of queue for matching time
         if(ack[1] <= 0):
             temp = packetQueue.get()
-            n = temp.message.split()
-            if((n[0] == "get") and (n[-1] == "1")):
-                temp.sendPacket(ipAddress, temp.addresss, temp.message)
-                ack[1] = 1
-            elif((n[0] == "get") and (n[-1] == "2")):
-                ack[1] = 0
-            else:
-                temp.sendPacket(ipAddress, 5000, temp.message)
-                temp.sendPacket(ipAddress, 5001, temp.message)
-                temp.sendPacket(ipAddress, 5002, temp.message)
-                temp.sendPacket(ipAddress, 5003, temp.message)
-                ack[1] = 4
+            temp.sendPacket(ipAddress, 5000, temp.message)
+            temp.sendPacket(ipAddress, 5001, temp.message)
+            temp.sendPacket(ipAddress, 5002, temp.message)
+            temp.sendPacket(ipAddress, 5003, temp.message)
+            ack[1] = 4
 
 def addPacket(msg, address):
     packet = PackStruct()
