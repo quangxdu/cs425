@@ -38,14 +38,14 @@ class Server:
 			message = data.split()
 			sys.stdout.write("Received: "+data+", System time is "+currTime.ctime()+" (Max Delay is 3 seconds)\n")
 			#Perform operations
-			if message[0] is "delete":
+			if(message[0] == "delete"):
 				del self.database[message[1]]
 				sys.stdout.write("Delete recieved\n")
-			elif message[0] is "insert" or message[0] is "update":
+			elif(message[0] == "insert") or (message[0] == "update"):
 				sys.stdout.write("Recieved insert)\n")
 				self.database[message[1]] = message[2]
 				self.client.addPacket("ack", 5005)
-			elif message[0] is "get":
+			elif(message[0] == "get"):
 				sys.stdout.write("Recieved get\n")
 				sys.stdout.write("Get: "+self.database[message[1]]+"\n")
 				self.client.addPacket("ack", 5005)

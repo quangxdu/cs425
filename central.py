@@ -22,10 +22,10 @@ def masterListen():
         data, address = s.recvfrom(1024)
         sys.stdout.write("Recieved: "+data+" \n")
         message = data.split()
-        if message[0] is "ack":
+        if(message[0] is "ack"):
             ack[address-4999] = "0"
         #Check if command is delete
-        elif message[0] is "delete":
+        elif(message[0] == "delete"):
             #Send delete signal to each server
             temp = PackStruct()
             temp.sendPacket(ipAddress, 5000, data)
@@ -39,10 +39,10 @@ def masterListen():
 def sendMsg():
     while True:
     #Check top value of queue for matching time
-        if(ack[1] is "0" and ack[2] is "0" and ack[3] is "0" and ack[4] is "0"):
+        if((ack[1] == "0") and (ack[2] == "0") and (ack[3] == "0") and (ack[4] == "0")):
             temp = packetQueue.get()
             n = temp.message.split()
-            if n[0] is "get":
+            if(n[0] == "get"):
                 temp.sendPacket(ipAddress, temp.addresss, temp.message)
                 ack[temp.address-4999] = "1"
             else:
