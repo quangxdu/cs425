@@ -37,8 +37,9 @@ class Client:
         packet.dest = dest
         currTime = datetime.datetime.now()
         packet.time = currTime
-        randtemp = random.randint(5,8)
+        randtemp = random.randint(10,18)
         delay = datetime.timedelta(seconds = randtemp)
+        sys.stdout.write( delay+"\n")
         packet.sendTime = currTime + delay
         packet.port = dest
         sys.stdout.write("Sent: "+msg+" to "+str(dest)+", System time is +" +currTime.ctime()+"\n")
