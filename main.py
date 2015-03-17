@@ -22,17 +22,20 @@ t = threading.Thread(target=myClient.waitQueue)
 t.daemon = True
 t.start()
 
+myServer.setClient(myClient)
+
 #Continually loop and listen to the terminal
 while True:
-    n = raw_input('What message do you want to send? ')
+    n = raw_input('What message do you want to send? \n')
     message = n.split()
     if len(message) > 0:
         if(message[0] ==  "send"):
             myClient.addPacket(message[1], int(message[-1]))
-        elif(message[0] == "quit"):
-            myClient.quit()
+        elif(message[0] == "q"):
             myServer.quit()
             sys.exit()
+        elif(message[0] == "get" and message[-1] == 2):
+            sys.stdout.write(myServer.returnValue(message[2]))
         else:
             myClient.addPacket(n, 5005)
 
