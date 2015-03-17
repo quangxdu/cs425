@@ -38,8 +38,8 @@ class Client:
         currTime = datetime.datetime.now()
         packet.time = currTime
         randtemp = random.randint(10,18)
-        delay = datetime.timedelta(seconds = randtemp)
-        sys.stdout.write(delay.ctime()+"\n")
+        delay = datetime.timedelta(0, randtemp)
+        sys.stdout.write(delay.time()+"\n")
         packet.sendTime = currTime + delay
         packet.port = dest
         sys.stdout.write("Sent: "+msg+" to "+str(dest)+", System time is +" +currTime.ctime()+"\n")
