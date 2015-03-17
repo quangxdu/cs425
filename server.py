@@ -35,6 +35,14 @@ class Server:
 			data, address = self.s.recvfrom(1024)
 			currTime = datetime.datetime.now()
 			sys.stdout.write("Received: "+data+", System time is "+currTime.ctime()+" (Max Delay is 3 seconds)\n")
+			message = data.split()
+			if message[0] is "delete":
+				del self.database[message[1]]
+			elif message[0] is "insert" or message[0] is "update":
+				self.database[message[1]] = message[2]
+			elif message[0] is "get":
+				sys.stdout.write("Get: "+self.database[message[1]]+"\n")
+				#This method is probably not the correct implementation of get -- it is simply a placeholder
 			
 	#Helper function that returns the current time
 	def returnTime(self):

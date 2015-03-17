@@ -30,10 +30,6 @@ while True:
             myClient.quit()
             myServer.quit()
             sys.exit()
-        elif(message[0] == "delete"):
-            #
-        elif(message[0] == "get"):
-            #
-        elif(message[0] == "insert" or message[0] == "update"):
-            #
+        else:
+            myClient.addPacket(n, 5005)
 
