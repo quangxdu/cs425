@@ -35,7 +35,7 @@ while True:
             myServer.quit()
             sys.exit()
         elif((message[0] == "get") and (message[-1] == "2")):
-            sys.stdout.write(myServer.returnValue(message[2]))
+            sys.stdout.write(myServer.returnValue(message[1]))
         elif(message[0] =="show-all"):
             for x in myServer.database:
                 sys.stdout.write(x+": "+x.returnVaue()+" \n")
