@@ -42,9 +42,11 @@ def sendMsg():
         if((ack[1] == "0") and (ack[2] == "0") and (ack[3] == "0") and (ack[4] == "0")):
             temp = packetQueue.get()
             n = temp.message.split()
-            if(n[0] == "get"):
+            if(n[0] == "get" and n[-1] == "1"):
                 temp.sendPacket(ipAddress, temp.addresss, temp.message)
                 ack[temp.address-4999] = "1"
+            elif(n[0] == "get" and n[-1] == "2"):
+                ack[temp.address-4999] = "0"
             else:
                 temp.sendPacket(ipAddress, 5000, temp.message)
                 temp.sendPacket(ipAddress, 5001, temp.message)
