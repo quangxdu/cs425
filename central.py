@@ -7,6 +7,7 @@ Created on Mar 8, 2015
 #Example:
 #>> python central.py 192.168.101.70
 import server, client, threading, sys, socket, Queue
+from curses.ascii import ACK
 
 class PackStruct:
     def sendPacket(self, ipAddress, port, message):
@@ -17,14 +18,14 @@ class PackStruct:
 #This function loops and listens to port 5005 for commands
 #and then passes it to one of the consistency functions to
 #send out the messages in the correct order 
-def masterListen(self):
+def masterListen():
     while True:
         data, address = s.recvfrom(1024)
         sys.stdout.write("Received: "+data+"\n")
         
         message = data.split()
         if(message[0] is "ack"):
-            self.ack = self.ack-1
+            ACK = ACK-1
         #Check if command is delete
         elif(message[0] == "delete"):
             #Send delete signal to each server
@@ -37,23 +38,23 @@ def masterListen(self):
         else:
             addPacket(data, address)
     
-def sendMsg(self):
+def sendMsg():
     while True:
     #Check top value of queue for matching time
-        if(ack <= 0):
+        if(ACK <= 0):
             temp = packetQueue.get()
             n = temp.message.split()
             if(n[0] == "get" and n[-1] == "1"):
                 temp.sendPacket(ipAddress, temp.addresss, temp.message)
-                self.ack = 1
+                ACK = 1
             elif(n[0] == "get" and n[-1] == "2"):
-                self.ack = 0
+                ACK = 0
             else:
                 temp.sendPacket(ipAddress, 5000, temp.message)
                 temp.sendPacket(ipAddress, 5001, temp.message)
                 temp.sendPacket(ipAddress, 5002, temp.message)
                 temp.sendPacket(ipAddress, 5003, temp.message)
-                self.ack = 4
+                ACK = 4
 
 def addPacket(msg, address):
     packet = PackStruct()
@@ -61,8 +62,9 @@ def addPacket(msg, address):
     packet.address = address
     packetQueue.put(packet)
     
+global ACK
+ACK = 4
 data = "0"
-ack = 0
 
 packetQueue = Queue.Queue(0)
 
