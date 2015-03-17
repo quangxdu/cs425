@@ -34,7 +34,7 @@ def masterListen():
             temp.sendPacket(ipAddress, 5002, data)
             temp.sendPacket(ipAddress, 5003, data)
             #Else choose consistency model
-        elif(message[0] == "get" or message[0] == "insert" or message[0] == "update"):
+        elif((message[0] == "get") or (message[0] == "insert") or (message[0] == "update")):
             addPacket(data, address)
         else:
             sys.stdout.write("Unknown command\n")
@@ -45,10 +45,10 @@ def sendMsg():
         if(ack[1] <= 0):
             temp = packetQueue.get()
             n = temp.message.split()
-            if(n[0] == "get" and n[-1] == "1"):
+            if((n[0] == "get") and (n[-1] == "1")):
                 temp.sendPacket(ipAddress, temp.addresss, temp.message)
                 ack[1] = 1
-            elif(n[0] == "get" and n[-1] == "2"):
+            elif((n[0] == "get") and (n[-1] == "2")):
                 ack[1] = 0
             else:
                 temp.sendPacket(ipAddress, 5000, temp.message)
