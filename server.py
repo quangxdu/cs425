@@ -34,7 +34,7 @@ class Server:
 				del self.database[message[1]]
 			elif(message[0] == "get"):
 				value = self.database[message[1]]
-				self.client.addPacket(value, address)
+				self.client.addPacket(value, address[1])
 			elif(message[0] == "insert" or message[0] == "update"):
 				self.database[message[1]] = message[2]
 				#Some method to update other servers
