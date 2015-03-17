@@ -38,7 +38,7 @@ class Server:
 			elif(message[0] == "insert" or message[0] == "update"):
 				self.database[message[1]] = message[2]
 				#Some method to update other servers
-	def setClient(self, client):
+	def getClient(self, client):
 		self.client = client
 	def returnTime(self):
 		return datetime.datetime.now();
