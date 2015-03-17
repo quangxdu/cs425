@@ -35,7 +35,7 @@ def masterListen():
         else:
             addPacket(data, address)
     
-def sendMsg(self):
+def sendMsg():
     while True:
     #Check top value of queue for matching time
         if(ack[1] is "0" and ack[2] is "0" and ack[3] is "0" and ack[4] is "0"):
@@ -83,7 +83,7 @@ t.daemon = True
 t.start()
 
 while True:
-    n = raw_input('Type quit to exit/n')
+    n = raw_input('Type quit to exit\n')
     msg = n.split()
     if len(msg) > 0:
         if(msg[0] == "quit"):
