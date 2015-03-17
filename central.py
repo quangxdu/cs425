@@ -23,7 +23,7 @@ def masterListen():
         sys.stdout.write("Received: "+data+" \n")
         message = data.split()
         if(message[0] is "ack"):
-            ack[address-4999] = "0"
+            ack[address[1]-4999] = "0"
         #Check if command is delete
         elif(message[0] == "delete"):
             #Send delete signal to each server
