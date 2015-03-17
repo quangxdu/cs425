@@ -36,19 +36,23 @@ class Client:
             temp = Client.packetQueue.get()
             while True:
                 if(temp.sendTime <= datetime.datetime.now()):
-                    temp.sendPacket(self.ipAddress, temp.dest, temp.message)
+                    if(temp.delay == 0):
+                        temp.sendPacket(self.ipAddress, temp.dest, temp.message)
                     break;
             
     #This function will add a packet to the queue after randomly 
     #adding in a delay time. It will also print out the sending
     #time, the message, and the destination
-    def addPacket(self, msg, dest):
+    def addPacket(self, msg, dest, delay =0):
         packet = PackStruct()
         packet.message = msg
         packet.dest = dest
+        packet.delay = delay
         currTime = datetime.datetime.now()
         packet.time = currTime
         randtemp = random.uniform(0,3)
+        if(delay == 1):
+            randtemp = msg
         packet.sendTime = currTime + datetime.timedelta(seconds=randtemp)
         sys.stdout.write("Sent: "+msg+" to "+str(dest)+", System time is +" +currTime.ctime()+"\n")
         Client.packetQueue.put(packet)
