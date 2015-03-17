@@ -27,7 +27,7 @@ class Client:
         while True:
             temp = Client.packetQueue.get()
             while True:
-                if(temp.sendTime >= datetime.datetime.now()):
+                if(temp.sendTime <= datetime.datetime.now()):
                     temp.sendPacket(self.ipAddress, temp.dest, temp.message)
                     break;
 
