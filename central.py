@@ -49,7 +49,7 @@ def sendMsg():
                 temp.sendPacket(ipAddress, 5001, temp.message)
                 temp.sendPacket(ipAddress, 5002, temp.message)
                 temp.sendPacket(ipAddress, 5003, temp.message)
-                ack[1], ack[2], ack[3], ack[4] = "1"
+                ack[1], ack[2], ack[3], ack[4] = "1", "1", "1", "1"
 
 def addPacket(msg, address):
     packet = PackStruct()
