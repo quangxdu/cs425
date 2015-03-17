@@ -22,6 +22,8 @@ t = threading.Thread(target=myClient.waitQueue)
 t.daemon = True
 t.start()
 
+myServer.setClient(myClient)
+
 #Continually loop and listen to the terminal
 while True:
     n = raw_input('What message do you want to send? ')
@@ -33,6 +35,8 @@ while True:
             myClient.quit()
             myServer.quit()
             sys.exit()
+        elif(message[0] == "get" and message[-1] == 2):
+            sys.stdout.write(myServer.returnValue(message[2]))
         else:
             myClient.addPacket(n, 5005)
 

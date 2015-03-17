@@ -19,6 +19,7 @@ class Server:
 	port = "0"
 	ipAddress = "0"
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+	client
 		
 	def __init__(self, inputIP, port):
 		self.ipAddress = inputIP
@@ -36,14 +37,21 @@ class Server:
 			currTime = datetime.datetime.now()
 			sys.stdout.write("Received: "+data+", System time is "+currTime.ctime()+" (Max Delay is 3 seconds)\n")
 			message = data.split()
+			#Perform operations
 			if message[0] is "delete":
 				del self.database[message[1]]
 			elif message[0] is "insert" or message[0] is "update":
 				self.database[message[1]] = message[2]
+				self.client.addPacket("ack", 5005)
 			elif message[0] is "get":
 				sys.stdout.write("Get: "+self.database[message[1]]+"\n")
-				#This method is probably not the correct implementation of get -- it is simply a placeholder
-			
+				self.client.addPacket("ack", 5005)
+	
+	def returnValue(self, key):
+		return self.database[key]
+	#Sets up the client for returning ack messages
+	def setClient(self, client):
+		self.client = client
 	#Helper function that returns the current time
 	def returnTime(self):
 		return datetime.datetime.now();
