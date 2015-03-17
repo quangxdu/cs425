@@ -44,4 +44,6 @@ class Server:
 		return datetime.datetime.now();
 	def delayTime(self):
 		return datetime.datetime.now() + datetime.timedelta(seconds = random.uniform(0,maxdelay));
+	def quit(self):
+		self.s.quit()
 

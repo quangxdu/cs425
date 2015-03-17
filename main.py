@@ -24,13 +24,13 @@ while True:
         if(message[0] ==  "send"):
             myClient.addPacket(message[1], int(message[-1]))
         elif(message[0] == "quit"):
-            sys.exit();     #Need to modify message[1]
+            myClient.quit()
+            myServer.quit()
+            sys.exit()
         elif(message[0] == "delete"):
-            del database[message[1]]
+            #
         elif(message[0] == "get"):
-            value = database[message[1]]
-            myClient.addPacket(message[1], message[2])
+            #
         elif(message[0] == "insert" or message[0] == "update"):
-            database[message[1]] = message[2]
-            #Some method to update other servers
+            #
 

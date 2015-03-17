@@ -43,3 +43,5 @@ class Client:
         sys.stdout.write("Sent: "+msg+" to "+str(dest)+", System time is +" +currTime.ctime()+"\n")
         Client.packetQueue.put(packet)
  
+        def quit(self):
+            self.s.close()
