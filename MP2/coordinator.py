@@ -5,14 +5,14 @@ import sys, math
 
 class coordinator:
 	nodeList = {}
-	
-	def removeNode(num):
+		
+	def removeNode(self, num):
+	#complicated shit
+	def addNode(self, num):
 		#complicated shit
-	def addNode(num):
-		#complicated shit
-	def findKey(num,key):
+	def findKey(self, num, key):
 		#complicated-ish shit
-	def show(num):
+	def show(self, num):
 	def showAll:
 		#print entire dictionary
 	
