@@ -9,13 +9,12 @@ import sys, math
 class Node:
     database = {}
     fingerTable = {}
-    key = 0
+	head = 0
+	tail = 0
     bestValue = 0
     
-    def __init__(self, key):
-        self.key = key
-        for i in range (0, 7):
-            self.fingerTable[i] = math.pow(2, i)
+    def __init__(self, head):
+        self.head = head
         
     def addValue(self, key, value):
         self.database[key] = value

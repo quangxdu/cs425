@@ -30,6 +30,8 @@ class coordinator:
 	
 	addNode will contain functions
 	createNode()
+		create a node
+		generate fingertable
 	moveKeysADD()
 	
 	findKey will first go to node num, then call function lookup, which will call lookup(nkey) on new node.
