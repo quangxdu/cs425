@@ -11,12 +11,16 @@ class coordinator:
 		tail = self.nodelist[num].getTail()
 		#Iterate through the current node and pick up all the keys
 		removedKeys = self.nodeList[num].rmAllNodeKeys()
-		#TO IMPLEMENT: Find previous node to collapse the keys into, call it prevNode
+		'''
+		TO IMPLEMENT: Find previous node in NodeList to collapse the keys into, call it prevNode
+		'''
 		prevNode.addNodeKeys(tail, removedKeys)
 		del self.NodeList[num]
 		
 	def addNode(self, num):
-		#TO IMPLEMENT: Find previous node to grab keys from, call it prevNode
+		'''
+		TO IMPLEMENT: Find previous node in NodeList to grab keys from, call it prevNode
+		'''
 		prevNode
 		#Find the tail of the previous node. This is the tail of the new node being added
 		tail = prevNode.getTail()
@@ -26,6 +30,9 @@ class coordinator:
 		removedKeys = prevNode.rmNodeKeys(num)
 		#Insert removed keys into our new node
 		newNode.addNodeKeys(tail, removedKeys)
+		'''
+		TO IMPLEMENT: Make a finger table
+		'''
 		self.NodeList[num] = newNode
 		return newNode
 		
@@ -65,7 +72,9 @@ self.NodeList[0] = Node0
 #Create new coordinator
 coordinator = coordinator.Coordinator()
 #Start up new thread for the first node
-#TO IMPLEMENT: Make looping thread function and replace InsertFunctionHere
+'''
+TO IMPLEMENT: Make looping thread function and replace InsertFunctionHere
+'''
 c = threading.Thread(target=Node0.InsertFunctionHere)
 c.daemon = True
 c.start()
