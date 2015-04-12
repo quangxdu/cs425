@@ -16,15 +16,44 @@ class Node:
     
     def __init__(self, head):
         self.head = head
+        self.tail = head
         
-    def addValue(self, key, value):
-        self.database[key] = value
+    def addValue(self, key):
+        self.database[key] = key
         
     def returnValue(self, key):
         return self.database[key]
-                             
-    def removeValue(self, key):
-        del self.database[key]
+    
+    def getTail(self):
+        return self.tail
+    
+    #rmNodeKeys takes in a new tail (greater than self.head, smaller than self.tail
+    #and iterates through the database, removing keys and adding them to a new
+    #temporary dictionary which it then returns. Also updates self.tail
+    def rmNodeKeys(self, newTail):
+        removedKeys = {}
+        for i in range(newTail, self.tail):
+            removedKeys[i] = self.database[i]
+            del self.database[i]
+        self.tail = (newTail-1)
+        return removedKeys
+    
+    #rmAllNodeKeys is called during removeNode and removes all keys, places them
+    #in a temporary dictionary, and returns that dictionary. 
+    def rmAllNodeKeys(self):
+        removedKeys = {}
+        for i in range(self.head, self.tail):
+            removedKeys[i] = self.database[i]
+            del self.database[i]
+        return removedKeys
+    
+    #addNodeKeys takes in a new tail (greater than self.head and self.tail) and iterates
+    #through the newKeys dictionary parameter, adding those keys to self.dictionary
+    #and then updates self.tail. 
+    def addNodeKeys(self, newTail, newKeys):
+        for i in range(self.tail, newTail):
+            self.database[i] = newKeys[i]
+        self.tail = newTail
         
     def setCoordinator(self, coord):
         self.coordinator = coord
