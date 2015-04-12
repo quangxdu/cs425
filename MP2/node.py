@@ -4,13 +4,14 @@ Created on Apr 10, 2015
 @author: Kevin
 '''
 
-import sys, math
+import sys, math, coordinator
 
 class Node:
     database = {}
+    coordinator
     fingerTable = {}
-	head = 0
-	tail = 0
+    head = 0
+    tail = 0
     bestValue = 0
     
     def __init__(self, head):
@@ -24,6 +25,9 @@ class Node:
                              
     def removeValue(self, key):
         del self.database[key]
+        
+    def setCoordinator(self, coord):
+        self.coordinator = coord
         
     def lookUp(self, key):
         if key in self.database.values():
