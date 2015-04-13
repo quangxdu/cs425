@@ -95,6 +95,9 @@ while True:
 	if len(message) > 0:
 		if(message[0] ==  "join"):
 			coordinator.addNode(message[1])
+			'''
+			TO IMPLEMENT: InsertFunctionHere
+			'''
 			c = threading.Thread(target=Node0.InsertFunctionHere)
 			c.daemon = True
 			c.start()
