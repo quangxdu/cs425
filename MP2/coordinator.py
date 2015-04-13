@@ -6,6 +6,16 @@ import sys, math, node, threading
 class coordinator:
 	NodeList = {}
 		
+	def __init__(self):
+		for i in range(0, 255):
+			self.NodeList[i] = 0
+		Node0 = node.Node(0);
+		newKeys = {}
+		for i in range (0, 255):
+			newKeys[i] = i
+		Node0.addNodeKeys(255, newKeys)
+		self.NodeList[0] = Node0
+	
 	def removeNode(self, num):
 		#Grab the tail of the current node being removed
 		tail = self.nodelist[num].getTail()
@@ -69,13 +79,7 @@ class coordinator:
 	
 	findKey will first go to node num, then call function lookup, which will call lookup(nkey) on new node.
 	'''
-#Create the first node with keys 0 to 255
-Node0 = node.Node(0);
-newKeys = {}
-for i in range (0, 255)
-	newKeys[i] = i
-Node0.addNodeKeys(255, newKeys)
-self.NodeList[0] = Node0
+
 #Create new coordinator
 coordinator = coordinator.Coordinator()
 #Start up new thread for the first node
