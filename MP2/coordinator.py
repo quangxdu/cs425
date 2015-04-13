@@ -49,15 +49,15 @@ class coordinator:
 	def findKey(self, num, key):
 		#complicated-ish shit
 	def show(self, num):
-	def showAll:
+	def showAll(self):
 		#print entire dictionary
 	def nearestNode(self,num):
 		i = num
 		while True:
-			if(nodeList[i] != 0):
+			if(self.NodeList[i] != 0):
 				break
 			i++
-			i % 255
+			i % 256
 		return i
 	'''
 	main thread is coordinator, which reads from terminal for commands.
