@@ -39,10 +39,8 @@ class coordinator:
 		removedKeys = prevNode.rmNodeKeys(num)
 		#Insert removed keys into our new node
 		newNode.addNodeKeys(tail, removedKeys)
-		'''
-		TO IMPLEMENT: Make a finger table
-		'''
 		self.NodeList[num] = newNode
+		#Update finger tables
 		for i in range(0,255):
 			if(self.NodeList != 0):
 				tempdict = {}
