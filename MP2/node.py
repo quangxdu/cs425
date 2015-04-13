@@ -27,6 +27,9 @@ class Node:
     def getTail(self):
         return self.tail
     
+    def setFingerTable(self, table):
+        self.fingerTable = table
+    
     #rmNodeKeys takes in a new tail (greater than self.head, smaller than self.tail
     #and iterates through the database, removing keys and adding them to a new
     #temporary dictionary which it then returns. Also updates self.tail
