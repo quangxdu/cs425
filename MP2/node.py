@@ -4,9 +4,10 @@ Created on Apr 10, 2015
 @author: Kevin
 '''
 
-import sys, math, coordinator
+import sys, math, coordinator, Queue
 
 class Node:
+    cmdQueue = Queue.Queue(0)
     database = {}
     coordinator
     fingerTable = {}
@@ -17,15 +18,33 @@ class Node:
     def __init__(self, head):
         self.head = head
         self.tail = head
+        
+        
+        '''
+        TO IMPLEMENT: This is the function that will be spinning. It should
+         continually check the queue and do things when a command is popped
+         off the queue.
+        '''
+    def checkQueue(self):
+        return self.cmdQueue.get()
+    
+    #Used by coordinator to give a command to the node
+    def addCmd(self, cmd):
+        #Interpret cmd here
+        self.cmdQueue.put(cmd)
+    
+    #Used to return a value to the coordinator
+    def returnValueToCoordinator(self, value):
+        self.coordinator.returnValueToCoordinator(value)
                
     def addValue(self, key):
         self.database[key] = key
         
     def returnValue(self, key):
-        return self.database[key]
+        self.coordinator.returnValueToCoordinator(self.database[key])
     
     def getTail(self):
-        return self.tail
+        self.coordinator.returnValueToCoordinator(self.tail)
     
     def setFingerTable(self, table):
         self.fingerTable = table

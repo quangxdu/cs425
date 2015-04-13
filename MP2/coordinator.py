@@ -1,10 +1,11 @@
 '''
 @author Sam Du
 '''
-import sys, math, node, threading
+import sys, math, node, threading, Queue
 
 class coordinator:
 	NodeList = {}
+	returnQueue = Queue.Queue(0)
 		
 	def __init__(self):
 		for i in range(0, 255):
@@ -12,12 +13,20 @@ class coordinator:
 		t1 = threading.Thread(target = node.Node, args = [0])
 		t1.daemon = True
 		t1.start()
-		Node0 = node.Node(0);
+		Node0 = node.Node(0)
 		newKeys = {}
 		for i in range (0, 255):
 			newKeys[i] = i
 		Node0.addNodeKeys(255, newKeys)
 		self.NodeList[0] = Node0
+		
+	#Used by nodes to place a return value into the queue
+	def returnValueToCoordinator(self, returnValue):
+		self.returnQueue.put(returnValue)
+	
+	#Used by coordinator to get the return value
+	def getReturnFromQueue(self):
+		return self.returnQueue.get()
 	
 	def removeNode(self, num):
 		#Find previous node
