@@ -17,7 +17,7 @@ class Node:
     def __init__(self, head):
         self.head = head
         self.tail = head
-        
+               
     def addValue(self, key):
         self.database[key] = key
         
