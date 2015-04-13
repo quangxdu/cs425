@@ -9,6 +9,9 @@ class coordinator:
 	def __init__(self):
 		for i in range(0, 255):
 			self.NodeList[i] = 0
+		t1 = threading.Thread(target = node.Node, args = [0])
+		t1.daemon = True
+		t1.start()
 		Node0 = node.Node(0);
 		newKeys = {}
 		for i in range (0, 255):
@@ -21,9 +24,7 @@ class coordinator:
 		tail = self.nodelist[num].getTail()
 		#Iterate through the current node and pick up all the keys
 		removedKeys = self.nodeList[num].rmAllNodeKeys()
-		'''
-		TO IMPLEMENT: Find previous node in NodeList to collapse the keys into, call it prevNode
-		'''
+		prevNode = NodeList[prevNode(num)]
 		prevNode.addNodeKeys(tail, removedKeys)
 		del self.NodeList[num]
 		
@@ -44,6 +45,12 @@ class coordinator:
 		TO IMPLEMENT: Make a finger table
 		'''
 		self.NodeList[num] = newNode
+		for i in range(0,255):
+			if(self.NodeList != 0):
+				tempdict = {}
+				for j in range(0,7):
+					tempdict[j] = self.nearestNode(num + math.pow(2,j))
+				self.Nodelist[i].setFingerTable(tempdict)
 		return newNode
 		
 	def findKey(self, num, key):
@@ -57,29 +64,21 @@ class coordinator:
 			if(self.NodeList[i] != 0):
 				break
 			i++
-			i % 256
+			i = i % 256
 		return i
-	'''
-	main thread is coordinator, which reads from terminal for commands.
-	each node is contained in the nodeList, which runs as a separate thread.
-	node will contain keys.
-	Initially we have node 0 which contains 0-255 keys 
-	'''
-	
-	'''
-	removeNode will contain functions
-	moveKeysRM()
-	deleteNode()
-	
-	addNode will contain functions
-	createNode()
-		create a node
-		generate fingertable
-	moveKeysADD()
-	
-	findKey will first go to node num, then call function lookup, which will call lookup(nkey) on new node.
-	'''
-
+	def prevNode(self,num)
+		i = num + 1
+		i = i%256
+		temp = 0
+		while True:
+			if(self.NodeList[i] != 0):
+				if(self.NodeList[i].head == num)
+					break
+				temp = i
+				i++
+				i = i%256
+		
+		return temp
 #Create new coordinator
 coordinator = coordinator.Coordinator()
 #Start up new thread for the first node
@@ -99,3 +98,19 @@ while True:
 			c = threading.Thread(target=Node0.InsertFunctionHere)
 			c.daemon = True
 			c.start()
+			sys.stdout.write("join complete")
+			
+		if(message[0] == "find"):
+			coordinator.findKey(message[1],message[2])
+			sys.stdout.write("find complete")
+			
+		if(message[0] == "leave"):
+			coordinator.removeNode(message[1])
+			sys.stdout.write("leave complete")
+
+		if(message[0] == "show"):
+			if(message[1] == "all"):
+				pass
+			sys.stdout.write("show complete")
+
+			
