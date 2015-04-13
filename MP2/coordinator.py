@@ -41,7 +41,14 @@ class coordinator:
 	def show(self, num):
 	def showAll:
 		#print entire dictionary
-	
+	def nearestNode(self,num):
+		i = num
+		while True:
+			if(nodeList[i] != 0):
+				break
+			i++
+			i % 255
+		return i
 	'''
 	main thread is coordinator, which reads from terminal for commands.
 	each node is contained in the nodeList, which runs as a separate thread.
