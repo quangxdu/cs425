@@ -20,19 +20,17 @@ class coordinator:
 		self.NodeList[0] = Node0
 	
 	def removeNode(self, num):
+		#Find previous node
+		prevNode = self.Coordinator.prevNode(num)
 		#Grab the tail of the current node being removed
 		tail = self.nodelist[num].getTail()
 		#Iterate through the current node and pick up all the keys
 		removedKeys = self.nodeList[num].rmAllNodeKeys()
-		prevNode = NodeList[prevNode(num)]
 		prevNode.addNodeKeys(tail, removedKeys)
 		del self.NodeList[num]
 		
 	def addNode(self, num):
-		'''
-		TO IMPLEMENT: Find previous node in NodeList to grab keys from, call it prevNode
-		'''
-		prevNode
+		prevNode = self.Coordinator.prevNode(num)
 		#Find the tail of the previous node. This is the tail of the new node being added
 		tail = prevNode.getTail()
 		#Create the new node
@@ -66,6 +64,7 @@ class coordinator:
 			i++
 			i = i % 256
 		return i
+	
 	def prevNode(self,num)
 		i = num + 1
 		i = i%256
@@ -77,8 +76,8 @@ class coordinator:
 				temp = i
 				i++
 				i = i%256
-		
 		return temp
+	
 #Create new coordinator
 coordinator = coordinator.Coordinator()
 #Start up new thread for the first node
