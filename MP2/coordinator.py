@@ -93,7 +93,8 @@ class Coordinator:
 		
 	def show(self, num):
 		CmdStruct(self.show,num)
-		self.NodeList[num].show()
+		self.NodeList[num].addCmd(CmdStruct("show"))
+		return self.getReturnFromQueue()
 		
 	def showAll(self):
 		for i in range(0,256):

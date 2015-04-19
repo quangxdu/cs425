@@ -10,10 +10,6 @@ while True:
 	if len(message) > 0:
 		if(message[0] ==  "join"):
 			coordinator.addNode(int(message[1]))
-			'''
-			TO IMPLEMENT: InsertFunctionHere
-			'''
-			
 			sys.stdout.write("join complete")
 			
 		if(message[0] == "find"):

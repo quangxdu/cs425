@@ -26,14 +26,16 @@ class node:
          off the queue.
         '''
     def checkQueue(self):
-		while True:
-			n = self.cmdQueue.get()
-			if(n.cmd ==  "rmAllNodeKeys"):
-				self.rmAllNodeKeys()
-			elif(n.cmd ==  "rmNodeKeys"):
-				self.rmNodeKeys(n.arg1)            
-			elif(n.cmd ==  "addNodeKeys"):
-				self.addsNodeKeys(n.arg1, n.arg2)
+        while True:
+            n = self.cmdQueue.get()
+            if(n.cmd ==  "rmAllNodeKeys"):
+                self.rmAllNodeKeys()
+            elif(n.cmd ==  "rmNodeKeys"):
+                self.rmNodeKeys(n.arg1)            
+            elif(n.cmd ==  "addNodeKeys"):
+                self.addsNodeKeys(n.arg1, n.arg2)
+            elif(n.cmd == "show"):
+                self.show()
 
     #Used by coordinator to give a command to the node
     def addCmd(self, cmd):
