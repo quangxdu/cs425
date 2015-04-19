@@ -90,12 +90,12 @@ class node:
     def addNodeKeys(self, newTail, newKeys):
         i = newTail
         while (i != self.tail):
-
             self.database[i] = newKeys[i]
             i = (i + 1 ) % 256
-        self.tail = newTail
+            self.tail = newTail
+            
     def initNode(self):
-		self.database[0] = 0
+        self.database[0] = 0
 		
     def setCoordinator(self, coord):
         self.coordinator = coord
