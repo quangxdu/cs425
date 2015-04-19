@@ -93,8 +93,8 @@ class Coordinator:
 		Nodelist[i].show()
 		key = getReturnFromQueue()
 	def showAll(self):
-		for i in range(0,256)
-			if(NodeList[i] != 0)
+		for i in range(0,256):
+			if(NodeList[i] != 0):
 				show(i)
 				
 		#print entire dictionary
@@ -103,20 +103,20 @@ class Coordinator:
 		while True:
 			if(self.NodeList[i] != 0):
 				break
-			i++
+			i = i + 1
 			i = i % 256
 		return i
 	
-	def nextNode(self,num)
+	def nextNode(self,num):
 		i = num - 1
 		i = i%256
 		temp = 0
 		while True:
 			if(self.NodeList[i] != 0):
-				if(self.NodeList[i].head == num)
+				if(self.NodeList[i].head == num):
 					break
 				temp = i
-				i--
+				i = i - 1
 				i = i%256
 		return temp
 	
@@ -144,12 +144,8 @@ while True:
 			sys.stdout.write("join complete")
 			
 		if(message[0] == "find"):
-<<<<<<< HEAD
-			coordinator.findKey(int(message[1]), int(message[2]))
-=======
 			temp = coordinator.findKey(message[1],message[2])
 			sys.stdout.write(temp)
->>>>>>> origin/master
 			sys.stdout.write("find complete")
 			
 		if(message[0] == "leave"):
@@ -159,7 +155,7 @@ while True:
 		if(message[0] == "show"):
 			if(message[1] == "all"):
 				coordinator.showAll()	
-			else
+			else:
 				coordinator.show(int(message[1]))
 			sys.stdout.write("show complete")
 			
