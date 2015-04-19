@@ -12,7 +12,7 @@ class CmdStruct:
 		self.cmd = cmd
 
 
-class coordinator:
+class Coordinator:
 	NodeList = {}
 	returnQueue = Queue.Queue(0)
 		
@@ -57,6 +57,9 @@ class coordinator:
 		tail = prevNode.getTail()
 		#Create the new node
 		newNode = node.Node(num)
+		c = threading.Thread(target=newNode.InsertFunctionHere)
+		c.daemon = True
+		c.start()
 		#Grab keys from the previous node
 		removedKeys = prevNode.rmNodeKeys(num)
 		#Insert removed keys into our new node
@@ -86,8 +89,8 @@ class coordinator:
 			i = i % 256
 		return i
 	
-	def prevNode(self,num)
-		i = num + 1
+	def nextNode(self,num)
+		i = num - 1
 		i = i%256
 		temp = 0
 		while True:
@@ -95,7 +98,7 @@ class coordinator:
 				if(self.NodeList[i].head == num)
 					break
 				temp = i
-				i++
+				i--
 				i = i%256
 		return temp
 	
@@ -109,6 +112,7 @@ c = threading.Thread(target=Node0.InsertFunctionHere)
 c.daemon = True
 c.start()
 
+
 while True:
 	n = raw_input('Type your command here: \n')
 	message = n.split()
@@ -118,9 +122,7 @@ while True:
 			'''
 			TO IMPLEMENT: InsertFunctionHere
 			'''
-			c = threading.Thread(target=Node0.InsertFunctionHere)
-			c.daemon = True
-			c.start()
+			
 			sys.stdout.write("join complete")
 			
 		if(message[0] == "find"):
