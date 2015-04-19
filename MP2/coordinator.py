@@ -63,6 +63,16 @@ class Coordinator:
 		
 	def findKey(self, num, key):
 		#complicated-ish shit
+		index = num
+		while True
+			NodeList{index}.addCmd(#lookup(key))
+			temp = getReturnFromQueue
+			if(temp[0] == "find"):
+				
+			else if(temp[0] == "miss")
+				return None
+			else
+				return temp[0]
 	def show(self, num):
 	def showAll(self):
 		#print entire dictionary
