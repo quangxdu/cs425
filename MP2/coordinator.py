@@ -19,7 +19,7 @@ class Coordinator:
 	returnQueue = Queue.Queue(0)
 		
 	def __init__(self):
-		for i in range(0, 255):
+		for i in range(0, 256):
 			self.NodeList[i] = 0
 		Node0 = nodes.node(0)
 		newKeys = {}

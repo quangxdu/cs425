@@ -82,9 +82,10 @@ class node:
     #and then updates self.tail. 
     def addNodeKeys(self, newTail, newKeys):
         i = newTail
-        while i != self.tail:
+        while (i != self.tail):
             self.database[i] = newKeys[i]
             i = (i + 1 ) % 256
+			print i
         self.tail = newTail
         
     def setCoordinator(self, coord):
