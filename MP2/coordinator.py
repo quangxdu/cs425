@@ -50,7 +50,7 @@ class Coordinator:
 		removedKeys = self.getReturnFromQueue()
 		cmd1 = CmdStruct("addNodeKeys", tail, removedKeys)
 		prevNode.addCmd(cmd1)
-		self.updateFingerTable()
+		self.updateFingerTable(num)
 		self.NodeList[num] = 0
 		
 	def addNode(self, num):
@@ -71,10 +71,10 @@ class Coordinator:
 		cmd2 = CmdStruct("addNodeKeys", tail, removedKeys)
 		newNode.addCmd(cmd2)
 		self.NodeList[num] = newNode
-		self.updateFingerTable()
+		self.updateFingerTable(num)
 		return newNode
 		
-	def updateFingerTable(self):
+	def updateFingerTable(self, num):
 		#Update finger tables
 		for i in range(0,256):
 			if(self.NodeList != 0):
@@ -86,16 +86,16 @@ class Coordinator:
 	def findKey(self, num, key):
 		#complicated-ish shit
 		index = num
-		return NodeList[num].lookUp(key)
+		return self.NodeList[num].lookUp(key)
 		
 	def show(self, num):
-		CmdStruct(show,num)
-		Nodelist[i].show()
-		key = getReturnFromQueue()
+		CmdStruct(self.show,num)
+		self.Nodelist[num].show()
+		key = self.getReturnFromQueue()
 	def showAll(self):
 		for i in range(0,256):
-			if(NodeList[i] != 0):
-				show(i)
+			if(self.NodeList[i] != 0):
+				self.show(i
 				
 		#print entire dictionary
 	def nearestNode(self,num):
@@ -144,7 +144,7 @@ while True:
 			sys.stdout.write("join complete")
 			
 		if(message[0] == "find"):
-			temp = coordinator.findKey(message[1],message[2])
+			temp = coordinator.findKey(int(message[1]),int(message[2]))
 			sys.stdout.write(temp)
 			sys.stdout.write("find complete")
 			
