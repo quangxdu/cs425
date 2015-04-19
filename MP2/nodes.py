@@ -26,13 +26,7 @@ class node:
          off the queue.
         '''
     def checkQueue(self):
-	
-		while True:
-			print "hi"
-	
-	
         while True:
-			
             n = self.cmdQueue.get()
             print "Node: Popped command from Coordinator off queue"
             if(n.cmd ==  "rmAllNodeKeys"):
