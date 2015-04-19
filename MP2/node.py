@@ -6,6 +6,7 @@ Created on Apr 10, 2015
 
 import sys, math, coordinator, Queue
 
+
 class Node:
     cmdQueue = Queue.Queue(0)
     database = {}
@@ -18,7 +19,7 @@ class Node:
     def __init__(self, head):
         self.head = head
         self.tail = head
-        
+        self.database[head] = head
         
         '''
         TO IMPLEMENT: This is the function that will be spinning. It should
@@ -26,8 +27,14 @@ class Node:
          off the queue.
         '''
     def checkQueue(self):
-        return self.cmdQueue.get()
-    
+        n = self.cmdQueue.get()
+        if(n.cmd ==  "rmAllNodeKeys"):
+            self.rmAllNodeKeys()
+        elif(n.cmd ==  "rmNodeKeys"):
+            self.rmNodeKeys(n.arg1)            
+        elif(n.cmd ==  "addNodeKeys"):
+            self.rmNodeKeys(n.arg1, n.arg2)
+
     #Used by coordinator to give a command to the node
     def addCmd(self, cmd):
         #Interpret cmd here
@@ -49,32 +56,35 @@ class Node:
     def setFingerTable(self, table):
         self.fingerTable = table
     
-    #rmNodeKeys takes in a new tail (greater than self.head, smaller than self.tail
+    #rmNodeKeys takes in a new tail (smaller than self.head, greater than self.tail
     #and iterates through the database, removing keys and adding them to a new
     #temporary dictionary which it then returns. Also updates self.tail
     def rmNodeKeys(self, newTail):
         removedKeys = {}
-        for i in range(newTail, self.tail):
-            removedKeys[i] = self.database[i]
-            del self.database[i]
-        self.tail = (newTail-1)
-        return removedKeys
+        while self.tail != newTail:
+            removedKeys[self.tail] = self.database[self.tail]
+            del self.database[self.tail]
+            self.tail = (self.tail + 1 ) % 256
+        self.tail += 1
+        self.coordinator.returnValueToCoordinator(removedKeys)
     
     #rmAllNodeKeys is called during removeNode and removes all keys, places them
     #in a temporary dictionary, and returns that dictionary. 
     def rmAllNodeKeys(self):
         removedKeys = {}
-        for i in range(self.head, self.tail):
+        for i in range(self.tail, self.head+1):
             removedKeys[i] = self.database[i]
             del self.database[i]
-        return removedKeys
+        self.coordinator.returnValueToCoordinator(removedKeys)
     
-    #addNodeKeys takes in a new tail (greater than self.head and self.tail) and iterates
+    #addNodeKeys takes in a new tail (smaller than self.head) and iterates
     #through the newKeys dictionary parameter, adding those keys to self.dictionary
     #and then updates self.tail. 
     def addNodeKeys(self, newTail, newKeys):
-        for i in range(self.tail, newTail):
+        i = newTail
+        while i != self.tail:
             self.database[i] = newKeys[i]
+            i = (i + 1 ) % 256
         self.tail = newTail
         
     def setCoordinator(self, coord):
