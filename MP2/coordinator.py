@@ -89,7 +89,14 @@ class Coordinator:
 		return NodeList[num].lookUp(key)
 		
 	def show(self, num):
+		CmdStruct(show,num)
+		Nodelist[i].show()
+		key = getReturnFromQueue()
 	def showAll(self):
+		for i in range(0,256)
+			if(NodeList[i] != 0)
+				show(i)
+				
 		#print entire dictionary
 	def nearestNode(self,num):
 		i = num
@@ -147,7 +154,10 @@ while True:
 
 		if(message[0] == "show"):
 			if(message[1] == "all"):
-				pass
+				coordinator.showAll()	
+			else
+				coordinator.show(int(message[1]))
 			sys.stdout.write("show complete")
+			
 
 			
