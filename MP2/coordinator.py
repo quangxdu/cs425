@@ -21,16 +21,16 @@ class Coordinator:
 	def __init__(self):
 		for i in range(0, 255):
 			self.NodeList[i] = 0
-		t1 = threading.Thread(target = node.Node, args = [0])
-		t1.daemon = True
-		t1.start()
 		Node0 = node.Node(0)
 		newKeys = {}
 		for i in range (0, 256):
 			newKeys[i] = i
 		Node0.addNodeKeys(1, newKeys)
 		Node0.setCoordinator(self)
-		self.NodeList[0] = Node0
+		self.NodeList[0] = Node0		
+		t1 = threading.Thread(target=Node0.checkQueue())
+		t1.daemon = True
+		t1.start()
 		
 	#Used by nodes to place a return value into the queue
 	def returnValueToCoordinator(self, returnValue):
@@ -46,11 +46,11 @@ class Coordinator:
 		#Grab the tail of the current node being removed
 		tail = self.nodelist[num].getTail()
 		#Iterate through the current node and pick up all the keys
-		removedKeys = self.nodeList[num].addCmd(CmdStruct("rmAllNodeKeys"))
-		cmd1 = CmdStruct("addNodeKeys")
-		cmd1.arg1 = tail
-		cmd1.arg2 = removedKeys
+		self.nodeList[num].addCmd(CmdStruct("rmAllNodeKeys"))
+		removedKeys = self.getReturnFromQueue()
+		cmd1 = CmdStruct("addNodeKeys", tail, removedKeys)
 		prevNode.addCmd(cmd1)
+		self.updateFingerTable()
 		self.NodeList[num] = 0
 		
 	def addNode(self, num):
@@ -59,23 +59,29 @@ class Coordinator:
 		tail = prevNode.getTail()
 		#Create the new node
 		newNode = node.Node(num)
-		c = threading.Thread(target=newNode.InsertFunctionHere)
+		newNode.setCoordinator(self)
+		c = threading.Thread(target=newNode.checkQueue())
 		c.daemon = True
 		c.start()
 		#Grab keys from the previous node
-		removedKeys = prevNode.rmNodeKeys(num)
+		cmd1 = CmdStruct("rmNodeKeys", num)
+		prevNode.addCmd(cmd1)
+		removedKeys = self.getReturnFromQueue()
 		#Insert removed keys into our new node
-		newNode.addNodeKeys(tail, removedKeys)
-		newNode.setCoordinator(self)
+		cmd2 = CmdStruct("addNodeKeys", tail, removedKeys)
+		newNode.addCmd(cmd2)
 		self.NodeList[num] = newNode
+		self.updateFingerTable()
+		return newNode
+		
+	def updateFingerTable(self):
 		#Update finger tables
-		for i in range(0,255):
+		for i in range(0,256):
 			if(self.NodeList != 0):
 				tempdict = {}
 				for j in range(0,7):
 					tempdict[j] = self.nearestNode(num + math.pow(2,j))
 				self.Nodelist[i].setFingerTable(tempdict)
-		return newNode
 		
 	def findKey(self, num, key):
 		#complicated-ish shit
