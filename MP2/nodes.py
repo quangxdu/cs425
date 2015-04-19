@@ -27,6 +27,7 @@ class node:
         '''
     def checkQueue(self):
         while True:
+		 print "derp"
             n = self.cmdQueue.get()
             print "Popped command from Coordinator off queue"
             if(n.cmd ==  "rmAllNodeKeys"):
@@ -90,7 +91,7 @@ class node:
     def addNodeKeys(self, newTail, newKeys):
         i = newTail
         while (i != self.tail):
-            print i
+
             self.database[i] = newKeys[i]
             i = (i + 1 ) % 256
         self.tail = newTail
