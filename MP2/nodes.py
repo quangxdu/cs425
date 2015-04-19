@@ -28,6 +28,7 @@ class node:
     def checkQueue(self):
         while True:
             n = self.cmdQueue.get()
+            print "Recieved command from Coordinator"
             if(n.cmd ==  "rmAllNodeKeys"):
                 self.rmAllNodeKeys()
             elif(n.cmd ==  "rmNodeKeys"):
@@ -36,6 +37,7 @@ class node:
                 self.addsNodeKeys(n.arg1, n.arg2)
             elif(n.cmd == "show"):
                 self.show()
+                print "Command recognized as show"
 
     #Used by coordinator to give a command to the node
     def addCmd(self, cmd):
@@ -44,6 +46,7 @@ class node:
     
     #Used to return a value to the coordinator
     def returnValueToCoordinator(self, value):
+        print "Sending return value"
         self.coordinator.returnValueToCoordinator(value)
                
     def addValue(self, key):
