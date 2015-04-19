@@ -99,9 +99,9 @@ class Node:
                     break
                 else:
                     bestValue = i
-		return self.coordinator.lookUp(bestValue,key)
+                return self.coordinator.lookUp(bestValue,key)
 
-    def show(self)
-		print self.head
-		for key in self.database:
-			print key ":" self.database[key]
+    def show(self):
+        print self.head
+        for key in self.database:
+            print key + ": " + self.database[key]
