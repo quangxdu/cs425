@@ -65,7 +65,6 @@ class node:
             del self.database[self.tail]
             print self.tail
             self.tail = (self.tail + 1 ) % 256
-        self.tail += 1
         #self.coordinator.returnValueToCoordinator(removedKeys)
         return removedKeys
     

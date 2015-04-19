@@ -88,7 +88,7 @@ class Coordinator:
 			if(self.NodeList[i] is not None):
 				tempdict = {}
 				for j in range(0,7):
-					tempdict[j] = self.nearestNode(num + math.pow(2,j))
+					tempdict[j] = self.nearestNode((num + math.pow(2,j))%256)
 				self.NodeList[i].setFingerTable(tempdict)
 		
 	def findKey(self, num, key):
