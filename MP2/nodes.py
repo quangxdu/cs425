@@ -50,7 +50,8 @@ class node:
         self.coordinator.returnValueToCoordinator(self.database[key])
     
     def getTail(self):
-        self.coordinator.returnValueToCoordinator(self.tail)
+        #self.coordinator.returnValueToCoordinator(self.tail)
+        return self.tail
     
     def setFingerTable(self, table):
         self.fingerTable = table
