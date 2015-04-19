@@ -60,7 +60,7 @@ class node:
     #temporary dictionary which it then returns. Also updates self.tail
     def rmNodeKeys(self, newTail):
         removedKeys = {}
-        while self.tail != newTail:
+        while self.tail != (newTail+1):
             removedKeys[self.tail] = self.database[self.tail]
             del self.database[self.tail]
             self.tail = (self.tail + 1 ) % 256
@@ -89,7 +89,7 @@ class node:
             print i
             self.database[i] = newKeys[i]
             i = (i + 1 ) % 256
-            self.tail = newTail
+        self.tail = newTail
             
     def initNode(self):
         self.database[0] = 0
