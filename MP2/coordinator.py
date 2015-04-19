@@ -29,9 +29,10 @@ class Coordinator:
 		Node0.initNode()
 		Node0.setCoordinator(self)
 		self.NodeList[0] = Node0
-		t1 = threading.Thread(target = Node0.checkQueue)
-		t1.daemon = True
-		t1.start
+
+	def returnFirst(self):
+		return self.NodeList[0]
+	
 	#Used by nodes to place a return value into the queue
 	def returnValueToCoordinator(self, returnValue):
 		self.returnQueue.put(returnValue)

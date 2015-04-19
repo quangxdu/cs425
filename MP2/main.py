@@ -3,6 +3,10 @@ import nodes, coordinator, threading, sys
 	
 #Create new coordinator
 coordinator = coordinator.Coordinator()
+Node0 = coordinator.returnFirst()
+t1 = threading.Thread(target = Node0.checkQueue)
+t1.daemon = True
+t1.start
 
 while True:
 	n = raw_input('Type your command here: \n')
