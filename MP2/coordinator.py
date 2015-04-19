@@ -17,7 +17,7 @@ class Coordinator:
 		newKeys = {}
 		for i in range (0, 255):
 			newKeys[i] = i
-		Node0.addNodeKeys(255, newKeys)
+		Node0.addNodeKeys(1, newKeys)
 		self.NodeList[0] = Node0
 		
 	#Used by nodes to place a return value into the queue
@@ -36,7 +36,7 @@ class Coordinator:
 		#Iterate through the current node and pick up all the keys
 		removedKeys = self.nodeList[num].rmAllNodeKeys()
 		prevNode.addNodeKeys(tail, removedKeys)
-		del self.NodeList[num]
+		self.NodeList[num] = 0
 		
 	def addNode(self, num):
 		prevNode = self.Coordinator.prevNode(num)
