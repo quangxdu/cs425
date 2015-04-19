@@ -83,7 +83,7 @@ class node:
     #and then updates self.tail. 
     def addNodeKeys(self, newTail, newKeys):
         i = newTail
-        print "Looping from " + newTail + " to " + self.tail
+        print "Looping from ", newTail, " to ", self.tail
         while (i != self.tail):
             print i
             self.database[i] = newKeys[i]
