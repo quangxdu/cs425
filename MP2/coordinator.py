@@ -96,9 +96,10 @@ class Coordinator:
 		
 	def show(self, num):
 			#CmdStruct(self.show,num)
-			#self.NodeList[num].addCmd(CmdStruct("show"))
-		return self.NodeList[num].show()
-		
+		if(self.NodeList[num] is not None):
+			return self.NodeList[num].show()
+		if(self.NodeList[num] is None):
+			return None
 	def showAll(self):
 		for i in range(0,256):
 			if(self.NodeList[i] is not None):
