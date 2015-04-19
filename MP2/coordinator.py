@@ -21,12 +21,11 @@ class Coordinator:
 	def __init__(self):
 		for i in range(0, 256):
 			self.NodeList[i] = None
-		Node0 = nodes.node(0)
+		Node0 = nodes.node(0); Node0.database = {};
 		newKeys = {}
 		for i in range (0, 256):
 			newKeys[i] = i
 		Node0.addNodeKeys(1, newKeys)
-		Node0.initNode()
 		Node0.setCoordinator(self)
 		self.NodeList[0] = Node0
 
@@ -60,9 +59,9 @@ class Coordinator:
         
 		prevNode = self.nextNode(num)
 		#Find the tail of the previous node. This is the tail of the new node being added
-		tail = prevNode.getTail(); print "this is", tail;
+		tail = prevNode.getTail();
 		#Create the new node
-		newNode = nodes.node(num)
+		newNode = nodes.node(num); newNode.database = {};
 		newNode.setCoordinator(self)
 #		c = threading.Thread(target=newNode.checkQueue)
 #		c.daemon = True

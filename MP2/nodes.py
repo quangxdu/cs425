@@ -85,9 +85,9 @@ class node:
     def addNodeKeys(self, newTail, newKeys):
         i = newTail
         while (i != self.tail):
-            print i
             self.database[i] = newKeys[i]
             i = (i + 1 ) % 256
+        self.database[i] = newKeys[i]
         self.tail = newTail
             
     def initNode(self):
