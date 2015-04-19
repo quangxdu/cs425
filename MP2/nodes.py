@@ -85,7 +85,7 @@ class node:
         while (i != self.tail):
             self.database[i] = newKeys[i]
             i = (i + 1 ) % 256
-			print i
+            print i
         self.tail = newTail
         
     def setCoordinator(self, coord):
