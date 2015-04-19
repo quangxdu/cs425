@@ -26,7 +26,7 @@ class Coordinator:
 		t1.start()
 		Node0 = node.Node(0)
 		newKeys = {}
-		for i in range (0, 255):
+		for i in range (0, 256):
 			newKeys[i] = i
 		Node0.addNodeKeys(1, newKeys)
 		Node0.setCoordinator(self)
