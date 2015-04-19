@@ -2,6 +2,15 @@
 @author Sam Du
 '''
 import sys, math, node, threading, Queue
+import cmd
+
+class CmdStruct:
+	cmd
+	arg1 = 0
+	arg2 = 0
+	def __init__(self, cmd):
+		self.cmd = cmd
+
 
 class coordinator:
 	NodeList = {}
@@ -18,6 +27,7 @@ class coordinator:
 		for i in range (0, 255):
 			newKeys[i] = i
 		Node0.addNodeKeys(1, newKeys)
+		Node0.setCoordinator(self)
 		self.NodeList[0] = Node0
 		
 	#Used by nodes to place a return value into the queue
@@ -34,8 +44,11 @@ class coordinator:
 		#Grab the tail of the current node being removed
 		tail = self.nodelist[num].getTail()
 		#Iterate through the current node and pick up all the keys
-		removedKeys = self.nodeList[num].rmAllNodeKeys()
-		prevNode.addNodeKeys(tail, removedKeys)
+		removedKeys = self.nodeList[num].addCmd(CmdStruct("rmAllNodeKeys"))
+		cmd1 = CmdStruct("addNodeKeys")
+		cmd1.arg1 = tail
+		cmd1.arg2 = removedKeys
+		prevNode.addCmd(cmd1)
 		self.NodeList[num] = 0
 		
 	def addNode(self, num):
@@ -48,6 +61,7 @@ class coordinator:
 		removedKeys = prevNode.rmNodeKeys(num)
 		#Insert removed keys into our new node
 		newNode.addNodeKeys(tail, removedKeys)
+		newNode.setCoordinator(self)
 		self.NodeList[num] = newNode
 		#Update finger tables
 		for i in range(0,255):
