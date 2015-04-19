@@ -99,5 +99,5 @@ class Node:
                     break
                 else:
                     bestValue = i
-           # return requestCoordinator    Request coordinator to lookUp on closer 
-                    
+		return self.coordinator.lookUp(bestValue,key)
+    

@@ -6,10 +6,12 @@ import cmd
 
 class CmdStruct:
 	cmd
-	arg1 = 0
-	arg2 = 0
-	def __init__(self, cmd):
+	arg1
+	arg2
+	def __init__(self, cmd,arg1 = 0, arg2 = 0):
 		self.cmd = cmd
+		self.arg1 = arg1
+		self.arg2 = arg2
 
 
 class Coordinator:
@@ -21,7 +23,7 @@ class Coordinator:
 			self.NodeList[i] = 0
 		Node0 = node.Node(0)
 		newKeys = {}
-		for i in range (0, 255):
+		for i in range (0, 256):
 			newKeys[i] = i
 		Node0.addNodeKeys(1, newKeys)
 		Node0.setCoordinator(self)
@@ -83,6 +85,9 @@ class Coordinator:
 		
 	def findKey(self, num, key):
 		#complicated-ish shit
+		index = num
+		return NodeList[num].lookUp(key)
+		
 	def show(self, num):
 	def showAll(self):
 		#print entire dictionary
@@ -132,7 +137,12 @@ while True:
 			sys.stdout.write("join complete")
 			
 		if(message[0] == "find"):
+<<<<<<< HEAD
 			coordinator.findKey(int(message[1]), int(message[2]))
+=======
+			temp = coordinator.findKey(message[1],message[2])
+			sys.stdout.write(temp)
+>>>>>>> origin/master
 			sys.stdout.write("find complete")
 			
 		if(message[0] == "leave"):
