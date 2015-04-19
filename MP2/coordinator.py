@@ -47,10 +47,12 @@ class Coordinator:
 		#Grab the tail of the current node being removed
 		tail = self.NodeList[num].getTail()
 		#Iterate through the current node and pick up all the keys
-		self.NodeList[num].addCmd(CmdStruct("rmAllNodeKeys"))
-		removedKeys = self.getReturnFromQueue()
-		cmd1 = CmdStruct("addNodeKeys", tail, removedKeys)
-		prevNode.addCmd(cmd1)
+		removedKeys = self.NodeList[num].rmAllNodeKeys()
+			#self.NodeList[num].addCmd(CmdStruct("rmAllNodeKeys"))
+			#removedKeys = self.getReturnFromQueue()
+		prevNode.addNodeKeys(tail, removedKeys)
+			#cmd1 = CmdStruct("addNodeKeys", tail, removedKeys)
+			#prevNode.addCmd(cmd1)
 		self.updateFingerTable(num)
 		self.NodeList[num] = 0
 		
@@ -67,9 +69,11 @@ class Coordinator:
 		c.daemon = True
 		c.start()
 		#Grab keys from the previous node
-		cmd1 = CmdStruct("rmNodeKeys", num)
-		prevNode.addCmd(cmd1)
-		removedKeys = self.getReturnFromQueue()
+		removedKeys = prevNode.rmNodeKeys()
+		#cmd1 = CmdStruct("rmNodeKeys", num)
+			#prevNode.addCmd(cmd1)
+			#removedKeys = self.getReturnFromQueue()
+		newNode.addNodeKeys(tail, removedKeys)
 		#Insert removed keys into our new node
 		cmd2 = CmdStruct("addNodeKeys", tail, removedKeys)
 		newNode.addCmd(cmd2)
@@ -93,11 +97,9 @@ class Coordinator:
 		return self.NodeList[num].lookUp(key)
 		
 	def show(self, num):
-		CmdStruct(self.show,num)
-		print "Coordinator: Send command to Node queue"
-		self.NodeList[num].addCmd(CmdStruct("show"))
-		print "Coordinator: Finished sending command to Node queue, waiting for response"
-		return self.getReturnFromQueue()
+			#CmdStruct(self.show,num)
+			#self.NodeList[num].addCmd(CmdStruct("show"))
+		return self.NodeList[num].show()
 		
 	def showAll(self):
 		for i in range(0,256):

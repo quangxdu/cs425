@@ -20,15 +20,10 @@ class node:
         self.head = head
         self.tail = head
         
-        '''
-        TO IMPLEMENT: This is the function that will be spinning. It should
-         continually check the queue and do things when a command is popped
-         off the queue.
-        '''
+        
     def checkQueue(self):
         while True:
             n = node.cmdQueue.get()
-            print "Node: Popped command from Coordinator off queue"
             if(n.cmd ==  "rmAllNodeKeys"):
                 self.rmAllNodeKeys()
             elif(n.cmd ==  "rmNodeKeys"):
@@ -42,13 +37,10 @@ class node:
     #Used by coordinator to give a command to the node
     def addCmd(self, cmd):
         #Interpret cmd here
-        print "Node: Entering add command, inserting into queue"
         node.cmdQueue.put(cmd)
-        print "Node: Finished inserting into queue"
     
     #Used to return a value to the coordinator
     def returnValueToCoordinator(self, value):
-        print "Sending return value"
         self.coordinator.returnValueToCoordinator(value)
                
     def addValue(self, key):
@@ -73,7 +65,8 @@ class node:
             del self.database[self.tail]
             self.tail = (self.tail + 1 ) % 256
         self.tail += 1
-        self.coordinator.returnValueToCoordinator(removedKeys)
+        #self.coordinator.returnValueToCoordinator(removedKeys)
+        return removedKeys
     
     #rmAllNodeKeys is called during removeNode and removes all keys, places them
     #in a temporary dictionary, and returns that dictionary. 
@@ -82,7 +75,8 @@ class node:
         for i in range(self.tail, self.head+1):
             removedKeys[i] = self.database[i]
             del self.database[i]
-        self.coordinator.returnValueToCoordinator(removedKeys)
+        #self.coordinator.returnValueToCoordinator(removedKeys)
+        return removedKeys
     
     #addNodeKeys takes in a new tail (smaller than self.head) and iterates
     #through the newKeys dictionary parameter, adding those keys to self.dictiona ry
