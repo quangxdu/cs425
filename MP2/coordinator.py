@@ -93,8 +93,9 @@ class Coordinator:
 		
 	def show(self, num):
 		CmdStruct(self.show,num)
+		print "Coordinator: Send command to Node queue"
 		self.NodeList[num].addCmd(CmdStruct("show"))
-		print "Send command to Node queue"
+		print "Coordinator: Finished sending command to Node queue, waiting for response"
 		return self.getReturnFromQueue()
 		
 	def showAll(self):
