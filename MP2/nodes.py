@@ -29,7 +29,7 @@ class node:
             elif(n.cmd ==  "rmNodeKeys"):
                 self.rmNodeKeys(n.arg1)            
             elif(n.cmd ==  "addNodeKeys"):
-                self.addsNodeKeys(n.arg1, n.arg2)
+                self.addNodeKeys(n.arg1, n.arg2)
             elif(n.cmd == "show"):
                 self.show()
 
@@ -83,7 +83,10 @@ class node:
     #and then updates self.tail. 
     def addNodeKeys(self, newTail, newKeys):
         i = newTail
+        for key in newKeys:
+            print newKeys[key]
         while (i != self.tail):
+            print i
             self.database[i] = newKeys[i]
             i = (i + 1 ) % 256
             self.tail = newTail
