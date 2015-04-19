@@ -26,12 +26,9 @@ class Coordinator:
 		for i in range (0, 256):
 			newKeys[i] = i
 		Node0.addNodeKeys(1, newKeys)
+		Node0.initNode()
 		Node0.setCoordinator(self)
-		self.NodeList[0] = Node0		
-		t1 = threading.Thread(target=Node0.checkQueue())
-		t1.daemon = True
-		t1.start()
-		
+		self.NodeList[0] = Node0	
 	#Used by nodes to place a return value into the queue
 	def returnValueToCoordinator(self, returnValue):
 		self.returnQueue.put(returnValue)
@@ -44,9 +41,9 @@ class Coordinator:
 		#Find previous node
 		prevNode = self.Coordinator.prevNode(num)
 		#Grab the tail of the current node being removed
-		tail = self.nodelist[num].getTail()
+		tail = self.NodeList[num].getTail()
 		#Iterate through the current node and pick up all the keys
-		self.nodeList[num].addCmd(CmdStruct("rmAllNodeKeys"))
+		self.NodeList[num].addCmd(CmdStruct("rmAllNodeKeys"))
 		removedKeys = self.getReturnFromQueue()
 		cmd1 = CmdStruct("addNodeKeys", tail, removedKeys)
 		prevNode.addCmd(cmd1)
@@ -81,14 +78,14 @@ class Coordinator:
 				tempdict = {}
 				for j in range(0,7):
 					tempdict[j] = self.nearestNode(num + math.pow(2,j))
-				self.Nodelist[i].setFingerTable(tempdict)
+				self.NodeList[i].setFingerTable(tempdict)
 		
 	def findKey(self, num, key):
 		return self.NodeList[num].lookUp(key)
 		
 	def show(self, num):
 		CmdStruct(self.show,num)
-		self.Nodelist[num].show()
+		self.NodeList[num].show()
 		
 	def showAll(self):
 		for i in range(0,256):

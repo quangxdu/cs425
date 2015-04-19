@@ -19,7 +19,6 @@ class node:
     def __init__(self, head):
         self.head = head
         self.tail = head
-        self.database[head] = head
         
         '''
         TO IMPLEMENT: This is the function that will be spinning. It should
@@ -78,16 +77,18 @@ class node:
         self.coordinator.returnValueToCoordinator(removedKeys)
     
     #addNodeKeys takes in a new tail (smaller than self.head) and iterates
-    #through the newKeys dictionary parameter, adding those keys to self.dictionary
+    #through the newKeys dictionary parameter, adding those keys to self.dictiona ry
     #and then updates self.tail. 
     def addNodeKeys(self, newTail, newKeys):
-        i = newTail
+        i = (newTail)%256
         while (i != self.tail):
             self.database[i] = newKeys[i]
             i = (i + 1 ) % 256
             print i
         self.tail = newTail
-        
+    def initNode(self):
+		self.database[0] = 0
+		
     def setCoordinator(self, coord):
         self.coordinator = coord
         
@@ -105,4 +106,4 @@ class node:
     def show(self):
         print self.head
         for key in self.database:
-            print key + ": " + self.database[key]
+            print key ,":", self.database[int(key)]

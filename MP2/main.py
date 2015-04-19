@@ -1,10 +1,4 @@
-import node, coordinator, threading, sys
-
-
-myCoord = coordinator.Coordinator();
-c = threading.Thread(target=myServer.update)
-c.daemon = True
-c.start()
+import nodes, coordinator, threading, sys
 
 	
 #Create new coordinator
