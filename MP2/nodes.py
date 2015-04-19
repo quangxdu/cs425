@@ -27,7 +27,11 @@ class node:
         '''
     def checkQueue(self):
         while True:
+<<<<<<< HEAD
             n = node.cmdQueue.get()
+=======
+            n = self.cmdQueue.get()
+>>>>>>> origin/master
             print "Node: Popped command from Coordinator off queue"
             if(n.cmd ==  "rmAllNodeKeys"):
                 self.rmAllNodeKeys()
