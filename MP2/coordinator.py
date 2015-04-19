@@ -20,7 +20,7 @@ class Coordinator:
 		
 	def __init__(self):
 		for i in range(0, 256):
-			self.NodeList[i] = 0
+			self.NodeList[i] = None
 		Node0 = nodes.node(0)
 		newKeys = {}
 		for i in range (0, 256):
@@ -28,7 +28,10 @@ class Coordinator:
 		Node0.addNodeKeys(1, newKeys)
 		Node0.initNode()
 		Node0.setCoordinator(self)
-		self.NodeList[0] = Node0	
+		self.NodeList[0] = Node0
+		t1 = threading.Thread(target = Node0.checkQueue)
+		t1.daemon = True
+		t1.start
 	#Used by nodes to place a return value into the queue
 	def returnValueToCoordinator(self, returnValue):
 		self.returnQueue.put(returnValue)
@@ -38,8 +41,8 @@ class Coordinator:
 		return self.returnQueue.get()
 	
 	def removeNode(self, num):
-		#Find previous node
-		prevNode = self.Coordinator.prevNode(num)
+		#Find next node
+		prevNode = self.nextNode(num)
 		#Grab the tail of the current node being removed
 		tail = self.NodeList[num].getTail()
 		#Iterate through the current node and pick up all the keys
@@ -51,13 +54,15 @@ class Coordinator:
 		self.NodeList[num] = 0
 		
 	def addNode(self, num):
-		prevNode = self.Coordinator.prevNode(num)
+		print "hi"
+		prevNode = self.nextNode(num)
+		print "woo"
 		#Find the tail of the previous node. This is the tail of the new node being added
 		tail = prevNode.getTail()
 		#Create the new node
-		newNode = node.Node(num)
+		newNode = nodes.node(num)
 		newNode.setCoordinator(self)
-		c = threading.Thread(target=newNode.checkQueue())
+		c = threading.Thread(target=newNode.checkQueue)
 		c.daemon = True
 		c.start()
 		#Grab keys from the previous node
@@ -69,12 +74,15 @@ class Coordinator:
 		newNode.addCmd(cmd2)
 		self.NodeList[num] = newNode
 		self.updateFingerTable(num)
+		t1 = threading.Thread(target = newNode.checkQueue())
+		t1.daemon = True
+		t1.start
 		return newNode
 		
 	def updateFingerTable(self, num):
 		#Update finger tables
 		for i in range(0,256):
-			if(self.NodeList != 0):
+			if(self.NodeList is not None):
 				tempdict = {}
 				for j in range(0,7):
 					tempdict[j] = self.nearestNode(num + math.pow(2,j))
@@ -103,14 +111,15 @@ class Coordinator:
 		return i
 	
 	def nextNode(self,num):
-		i = num - 1
+		i = num + 1
 		i = i%256
-		temp = 0
 		while True:
-			if(self.NodeList[i] != 0):
-				if(self.NodeList[i].head == num):
-					break
+			if(self.NodeList[i] is None): 
+				pass
+			else:
 				temp = i
-				i = i - 1
-				i = i%256
-		return temp
+				break
+			i = i + 1
+			i = i%256
+				
+		return self.NodeList[temp]

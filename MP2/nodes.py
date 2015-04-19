@@ -26,13 +26,14 @@ class node:
          off the queue.
         '''
     def checkQueue(self):
-        n = self.cmdQueue.get()
-        if(n.cmd ==  "rmAllNodeKeys"):
-            self.rmAllNodeKeys()
-        elif(n.cmd ==  "rmNodeKeys"):
-            self.rmNodeKeys(n.arg1)            
-        elif(n.cmd ==  "addNodeKeys"):
-            self.rmNodeKeys(n.arg1, n.arg2)
+		while True:
+			n = self.cmdQueue.get()
+			if(n.cmd ==  "rmAllNodeKeys"):
+				self.rmAllNodeKeys()
+			elif(n.cmd ==  "rmNodeKeys"):
+				self.rmNodeKeys(n.arg1)            
+			elif(n.cmd ==  "addNodeKeys"):
+				self.addsNodeKeys(n.arg1, n.arg2)
 
     #Used by coordinator to give a command to the node
     def addCmd(self, cmd):
@@ -80,11 +81,11 @@ class node:
     #through the newKeys dictionary parameter, adding those keys to self.dictiona ry
     #and then updates self.tail. 
     def addNodeKeys(self, newTail, newKeys):
-        i = (newTail)%256
+        i = newTail
         while (i != self.tail):
+            print i
             self.database[i] = newKeys[i]
             i = (i + 1 ) % 256
-            print i
         self.tail = newTail
     def initNode(self):
 		self.database[0] = 0
