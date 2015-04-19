@@ -96,7 +96,7 @@ class node:
             print i, ":", newKeys[i]
             self.database[i] = newKeys[i]
             i = (i + 1 ) % 256
-            
+        self.tail = newTail
     def initNode(self):
         self.database[0] = 0
         
@@ -104,15 +104,19 @@ class node:
         self.coordinator = coord
         
     def lookUp(self, key):
+        bestValue = None
+        i = 0
         if key in self.database.values():
             return self.database[key]
         else:
-            for i in range (0, 7):
+            for i in range (0, 8):
+                print self.fingerTable[i]
                 if key > self.fingerTable[i]:
                     break
                 else:
                     bestValue = i
-                return self.coordinator.lookUp(bestValue,key)
+            print bestValue
+            return self.coordinator.findKey(bestValue,key)
 
     def show(self):
         print self.head

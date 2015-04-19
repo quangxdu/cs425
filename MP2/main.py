@@ -18,7 +18,7 @@ while True:
 			
 		if(message[0] == "find"):
 			temp = coordinator.findKey(int(message[1]),int(message[2]))
-			sys.stdout.write(temp)
+			print temp
 			sys.stdout.write("find complete")
 			
 		if(message[0] == "leave"):

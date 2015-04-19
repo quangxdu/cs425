@@ -28,6 +28,7 @@ class Coordinator:
 		Node0.addNodeKeys(1, newKeys)
 		Node0.setCoordinator(self)
 		self.NodeList[0] = Node0
+		self.updateFingerTable()
 
 	def returnFirst(self):
 		return self.NodeList[0]
@@ -53,9 +54,7 @@ class Coordinator:
 			#cmd1 = CmdStruct("addNodeKeys", tail, removedKeys)
 			#prevNode.addCmd(cmd1)
 		self.NodeList[num] = None
-		for i in range(0,256):
-			if (self.NodeList[i] is not None):
-				self.updateFingerTable(i)
+		self.updateFingerTable(i)
 		
 	def addNode(self, num):
 		prevNode = self.nextNode(num)
@@ -77,19 +76,19 @@ class Coordinator:
 		cmd2 = CmdStruct("addNodeKeys", tail, removedKeys)
 		newNode.addCmd(cmd2)
 		self.NodeList[num] = newNode
-		self.updateFingerTable(num)
+		self.updateFingerTable()
 #		t1 = threading.Thread(target = newNode.checkQueue())
 #		t1.daemon = True
 #		t1.start
 		return newNode
 		
-	def updateFingerTable(self, num):
+	def updateFingerTable(self):
 		#Update finger tables
 		for i in range(0,256):
 			if(self.NodeList[i] is not None):
 				tempdict = {}
-				for j in range(0,7):
-					tempdict[j] = self.nearestNode((num + math.pow(2,j))%256)
+				for j in range(0,8):
+					tempdict[j] = self.nextNode((i + math.pow(2,j))%256)
 				self.NodeList[i].setFingerTable(tempdict)
 		
 	def findKey(self, num, key):
