@@ -69,7 +69,7 @@ class Coordinator:
 		c.daemon = True
 		c.start()
 		#Grab keys from the previous node
-		removedKeys = prevNode.rmNodeKeys()
+		removedKeys = prevNode.rmNodeKeys(num)
 		#cmd1 = CmdStruct("rmNodeKeys", num)
 			#prevNode.addCmd(cmd1)
 			#removedKeys = self.getReturnFromQueue()
