@@ -6,8 +6,8 @@ import cmd
 
 class CmdStruct:
 	cmd
-	arg1
-	arg2
+	arg1 = 0
+	arg2 = 0
 	def __init__(self, cmd,arg1 = 0, arg2 = 0):
 		self.cmd = cmd
 		self.arg1 = arg1
@@ -84,18 +84,16 @@ class Coordinator:
 				self.Nodelist[i].setFingerTable(tempdict)
 		
 	def findKey(self, num, key):
-		#complicated-ish shit
-		index = num
 		return self.NodeList[num].lookUp(key)
 		
 	def show(self, num):
 		CmdStruct(self.show,num)
 		self.Nodelist[num].show()
-		key = self.getReturnFromQueue()
+		
 	def showAll(self):
 		for i in range(0,256):
 			if(self.NodeList[i] != 0):
-				self.show(i
+				self.show(i)
 				
 		#print entire dictionary
 	def nearestNode(self,num):
@@ -121,15 +119,7 @@ class Coordinator:
 		return temp
 	
 #Create new coordinator
-coordinator = coordinator.Coordinator()
-#Start up new thread for the first node
-'''
-TO IMPLEMENT: Make looping thread function and replace InsertFunctionHere
-'''
-c = threading.Thread(target=Node0.InsertFunctionHere)
-c.daemon = True
-c.start()
-
+coordinator = Coordinator.Coordinator()
 
 while True:
 	n = raw_input('Type your command here: \n')
