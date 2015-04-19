@@ -54,7 +54,6 @@ class node:
     
     def setFingerTable(self, table):
         self.fingerTable = table
-        print self.fingerTable
     
     #rmNodeKeys takes in a new tail (smaller than self.head, greater than self.tail
     #and iterates through the database, removing keys and adding them to a new
@@ -103,7 +102,7 @@ class node:
         self.coordinator = coord
         
     def lookUp(self, key):
-        bestValue = None
+        bestValue = 1
         if key in self.database.values():
             return self.database[key]
         else:
