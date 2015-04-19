@@ -86,9 +86,9 @@ class Coordinator:
 		#Update finger tables
 		for i in range(0,256):
 			if(self.NodeList[i] is not None):
-				tempdict = {}
+				tempdict = {};
 				for j in range(0,8):
-					tempdict[j] = self.nextNode((i + math.pow(2,j))%256)
+					tempdict[j] = self.nextNode((i + math.pow(2,j))%256).head
 				self.NodeList[i].setFingerTable(tempdict)
 		
 	def findKey(self, num, key):

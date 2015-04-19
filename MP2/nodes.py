@@ -54,6 +54,7 @@ class node:
     
     def setFingerTable(self, table):
         self.fingerTable = table
+        print self.fingerTable
     
     #rmNodeKeys takes in a new tail (smaller than self.head, greater than self.tail
     #and iterates through the database, removing keys and adding them to a new
@@ -84,10 +85,8 @@ class node:
     def addNodeKeys(self, newTail, newKeys):
         i = newTail
         while (i != self.tail):
-            print i, ":", newKeys[i]
             self.database[i] = newKeys[i]
             i = (i + 1 ) % 256
-        print i, ":", newKeys[i]
         self.database[i] = newKeys[i]
         self.tail = newTail
     def addOldNodeKeys(self, newTail, newKeys):
@@ -105,18 +104,15 @@ class node:
         
     def lookUp(self, key):
         bestValue = None
-        i = 0
         if key in self.database.values():
             return self.database[key]
         else:
             for i in range (0, 8):
-                print self.fingerTable[i]
                 if key > self.fingerTable[i]:
                     break
                 else:
                     bestValue = i
-            print bestValue
-            return self.coordinator.findKey(bestValue,key)
+            return self.coordinator.findKey(self.fingerTable[bestValue],key)
 
     def show(self):
         print self.head
