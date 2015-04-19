@@ -52,13 +52,12 @@ class Coordinator:
 		prevNode.addOldNodeKeys(tail, removedKeys)
 			#cmd1 = CmdStruct("addNodeKeys", tail, removedKeys)
 			#prevNode.addCmd(cmd1)
-		
-		self.updateFingerTable(num)
 		self.NodeList[num] = None
-		
+		for i in range(0,256):
+			if (self.NodeList[i] is not None):
+				self.updateFingerTable(i)
 		
 	def addNode(self, num):
-        
 		prevNode = self.nextNode(num)
 		#Find the tail of the previous node. This is the tail of the new node being added
 		tail = prevNode.getTail();
