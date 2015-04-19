@@ -1,7 +1,7 @@
 '''
 @author Sam Du
 '''
-import sys, math, node, threading, Queue
+import sys, math, nodes, threading, Queue
 import cmd
 
 class CmdStruct:
@@ -21,7 +21,7 @@ class Coordinator:
 	def __init__(self):
 		for i in range(0, 255):
 			self.NodeList[i] = 0
-		Node0 = node.Node(0)
+		Node0 = nodes.node(0)
 		newKeys = {}
 		for i in range (0, 256):
 			newKeys[i] = i
@@ -119,7 +119,7 @@ class Coordinator:
 		return temp
 	
 #Create new coordinator
-coordinator = Coordinator.Coordinator()
+coordinator = Coordinator()
 
 while True:
 	n = raw_input('Type your command here: \n')
