@@ -63,6 +63,7 @@ class node:
         while self.tail != (newTail+1):
             removedKeys[self.tail] = self.database[self.tail]
             del self.database[self.tail]
+            print self.tail
             self.tail = (self.tail + 1 ) % 256
         self.tail += 1
         #self.coordinator.returnValueToCoordinator(removedKeys)
@@ -83,8 +84,6 @@ class node:
     #and then updates self.tail. 
     def addNodeKeys(self, newTail, newKeys):
         i = newTail
-        for key in newKeys:
-            print newKeys[key]
         while (i != self.tail):
             print i
             self.database[i] = newKeys[i]

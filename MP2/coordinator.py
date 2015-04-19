@@ -57,17 +57,16 @@ class Coordinator:
 		self.NodeList[num] = 0
 		
 	def addNode(self, num):
-		print "hi"
+        
 		prevNode = self.nextNode(num)
-		print "woo"
 		#Find the tail of the previous node. This is the tail of the new node being added
-		tail = prevNode.getTail()
+		tail = prevNode.getTail(); print "this is", tail;
 		#Create the new node
 		newNode = nodes.node(num)
 		newNode.setCoordinator(self)
-		c = threading.Thread(target=newNode.checkQueue)
-		c.daemon = True
-		c.start()
+#		c = threading.Thread(target=newNode.checkQueue)
+#		c.daemon = True
+#		c.start()
 		#Grab keys from the previous node
 		removedKeys = prevNode.rmNodeKeys(num)
 		#cmd1 = CmdStruct("rmNodeKeys", num)
@@ -79,15 +78,15 @@ class Coordinator:
 		newNode.addCmd(cmd2)
 		self.NodeList[num] = newNode
 		self.updateFingerTable(num)
-		t1 = threading.Thread(target = newNode.checkQueue())
-		t1.daemon = True
-		t1.start
+#		t1 = threading.Thread(target = newNode.checkQueue())
+#		t1.daemon = True
+#		t1.start
 		return newNode
 		
 	def updateFingerTable(self, num):
 		#Update finger tables
 		for i in range(0,256):
-			if(self.NodeList is not None):
+			if(self.NodeList[i] is not None):
 				tempdict = {}
 				for j in range(0,7):
 					tempdict[j] = self.nearestNode(num + math.pow(2,j))
@@ -103,14 +102,14 @@ class Coordinator:
 		
 	def showAll(self):
 		for i in range(0,256):
-			if(self.NodeList[i] != 0):
+			if(self.NodeList[i] is not None):
 				self.show(i)
 				
 		#print entire dictionary
 	def nearestNode(self,num):
 		i = num
 		while True:
-			if(self.NodeList[i] != 0):
+			if(self.NodeList[i] is not None):
 				break
 			i = i + 1
 			i = i % 256
@@ -127,5 +126,4 @@ class Coordinator:
 				break
 			i = i + 1
 			i = i%256
-				
 		return self.NodeList[temp]
