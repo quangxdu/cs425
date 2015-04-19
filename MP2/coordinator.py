@@ -49,11 +49,13 @@ class Coordinator:
 		removedKeys = self.NodeList[num].rmAllNodeKeys()
 			#self.NodeList[num].addCmd(CmdStruct("rmAllNodeKeys"))
 			#removedKeys = self.getReturnFromQueue()
-		prevNode.addNodeKeys(tail, removedKeys)
+		prevNode.addOldNodeKeys(tail, removedKeys)
 			#cmd1 = CmdStruct("addNodeKeys", tail, removedKeys)
 			#prevNode.addCmd(cmd1)
+		
 		self.updateFingerTable(num)
-		self.NodeList[num] = 0
+		self.NodeList[num] = None
+		
 		
 	def addNode(self, num):
         
