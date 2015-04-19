@@ -136,7 +136,7 @@ while True:
 	message = n.split()
 	if len(message) > 0:
 		if(message[0] ==  "join"):
-			coordinator.addNode(message[1])
+			coordinator.addNode(int(message[1]))
 			'''
 			TO IMPLEMENT: InsertFunctionHere
 			'''
@@ -144,12 +144,16 @@ while True:
 			sys.stdout.write("join complete")
 			
 		if(message[0] == "find"):
+<<<<<<< HEAD
+			coordinator.findKey(int(message[1]), int(message[2]))
+=======
 			temp = coordinator.findKey(message[1],message[2])
 			sys.stdout.write(temp)
+>>>>>>> origin/master
 			sys.stdout.write("find complete")
 			
 		if(message[0] == "leave"):
-			coordinator.removeNode(message[1])
+			coordinator.removeNode(int(message[1]))
 			sys.stdout.write("leave complete")
 
 		if(message[0] == "show"):
