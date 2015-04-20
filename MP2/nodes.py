@@ -116,8 +116,9 @@ class node:
     def show(self):
         print self.head
         s = str(self.head) + " "
-        for key in self.database:
-            print key ,":", self.database[int(key)]
-            s += str(key) + " "
+        for i in sorted(self.database):
+            
+                print i ,":", self.database[int(i)]
+                s += str(i) + " "
         s += "\n"
         return s
