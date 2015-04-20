@@ -1,6 +1,5 @@
 import nodes, coordinator, threading, sys
 
-counter = 0
 continue_looping = 1
 
 #Check if the user wants writeback
@@ -25,18 +24,15 @@ while (continue_looping):
 		if(message[0] ==  "join"):
 			coordinator.addNode(int(message[1]))
 			sys.stdout.write("join complete")
-			counter += 1
 					
 		if(message[0] == "find"):
 			temp = coordinator.findKey(int(message[1]),int(message[2]))
 			print temp
 			sys.stdout.write("find complete")
-			counter += 1
 			
 		if(message[0] == "leave"):
 			coordinator.removeNode(int(message[1]))
 			sys.stdout.write("leave complete")
-			counter += 1
 
 		if(message[0] == "show"):
 			if(message[1] == "all"):
@@ -50,6 +46,13 @@ while (continue_looping):
 				else:
 					coordinator.show(int(message[1]))
 			sys.stdout.write("show complete")
+			
+		if(message[0] == "fcounter"):
+			coordinator.printFind()
+			
+		if(message[0] == "acounter"):
+			coordinator.printAdd()
+			
 		if(message[0] == "quit"):
 			f.close()
 			continue_looping = 0

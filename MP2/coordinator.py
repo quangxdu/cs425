@@ -17,6 +17,8 @@ class CmdStruct:
 class Coordinator:
 	NodeList = {}
 	returnQueue = Queue.Queue(0)
+	findCounter = 0
+	addCounter = 0
 		
 	def __init__(self):
 		for i in range(0, 256):
@@ -26,9 +28,12 @@ class Coordinator:
 		for i in range (0, 256):
 			newKeys[i] = i
 		Node0.addNodeKeys(1, newKeys)
+		self.addCounter += 1
 		Node0.setCoordinator(self)
+		self.addCounter += 1
 		self.NodeList[0] = Node0
 		self.updateFingerTable()
+		self.addCounter += 1
 
 	def returnFirst(self):
 		return self.NodeList[0]
@@ -54,27 +59,31 @@ class Coordinator:
 			#cmd1 = CmdStruct("addNodeKeys", tail, removedKeys)
 			#prevNode.addCmd(cmd1)
 		self.NodeList[num] = None
-		self.updateFingerTable(i)
+		self.updateFingerTable()
 		
 	def addNode(self, num):
 		prevNode = self.nextNode(num)
 		#Find the tail of the previous node. This is the tail of the new node being added
 		tail = prevNode.getTail();
+		self.addCounter += 1
 		#Create the new node
 		newNode = nodes.node(num); newNode.database = {};
 		newNode.setCoordinator(self)
+		self.addCounter += 1
 #		c = threading.Thread(target=newNode.checkQueue)
 #		c.daemon = True
 #		c.start()
 		#Grab keys from the previous node
 		removedKeys = prevNode.rmNodeKeys(num)
+		self.addCounter += 1
 		#cmd1 = CmdStruct("rmNodeKeys", num)
 			#prevNode.addCmd(cmd1)
 			#removedKeys = self.getReturnFromQueue()
 		newNode.addNodeKeys(tail, removedKeys)
+		self.addCounter += 1
 		#Insert removed keys into our new node
-		cmd2 = CmdStruct("addNodeKeys", tail, removedKeys)
-		newNode.addCmd(cmd2)
+		#cmd2 = CmdStruct("addNodeKeys", tail, removedKeys)
+		#newNode.addCmd(cmd2)
 		self.NodeList[num] = newNode
 		self.updateFingerTable()
 #		t1 = threading.Thread(target = newNode.checkQueue())
@@ -87,12 +96,20 @@ class Coordinator:
 		for i in range(0,256):
 			if(self.NodeList[i] is not None):
 				tempdict = {};
+				self.addCounter += 1
 				for j in range(0,8):
 					tempdict[j] = self.nextNode((i + math.pow(2,j))%256 - 1).head
 				self.NodeList[i].setFingerTable(tempdict)
 		
 	def findKey(self, num, key):
+		self.findCounter += 1
 		return self.NodeList[num].lookUp(key)
+		
+	def printAdd(self):
+		print self.addCounter
+		
+	def printFind(self):
+		print self.findCounter
 		
 	def show(self, num):
 			#CmdStruct(self.show,num)
