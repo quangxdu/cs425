@@ -100,10 +100,13 @@ class Coordinator:
 			return self.NodeList[num].show()
 		if(self.NodeList[num] is None):
 			return None
+
 	def showAll(self):
+		s = ""
 		for i in range(0,256):
 			if(self.NodeList[i] is not None):
-				self.show(i)
+				s += self.show(i)
+		return s
 				
 		#print entire dictionary
 	def nearestNode(self,num):

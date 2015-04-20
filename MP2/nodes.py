@@ -115,5 +115,9 @@ class node:
 
     def show(self):
         print self.head
+        s = self.head + " "
         for key in self.database:
             print key ,":", self.database[int(key)]
+            s += key + " "
+        s += "\n"
+        return s
