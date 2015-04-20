@@ -79,7 +79,7 @@ class node:
         return removedKeys
     
     #addNodeKeys takes in a new tail (smaller than self.head) and iterates
-    #through the newKeys dictionary parameter, adding those keys to self.dictiona ry
+    #through the newKeys dictionary parameter, adding those keys to self.dictionary
     #and then updates self.tail. 
     def addNodeKeys(self, newTail, newKeys):
         i = newTail
@@ -102,7 +102,7 @@ class node:
         self.coordinator = coord
         
     def lookUp(self, key):
-        bestValue = 1
+        bestValue = 0
         if key in self.database.values():
             return self.database[key]
         else:

@@ -98,7 +98,7 @@ class Coordinator:
 				tempdict = {};
 				self.addCounter += 1
 				for j in range(0,8):
-					tempdict[j] = self.nextNode((i + math.pow(2,j))%256 - 1).head
+					tempdict[j] = self.nextNode((i + math.pow(2,j)-1) %256).head
 				self.NodeList[i].setFingerTable(tempdict)
 		
 	def findKey(self, num, key):
