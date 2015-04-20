@@ -106,10 +106,10 @@ class Coordinator:
 		return self.NodeList[num].lookUp(key)
 		
 	def printAdd(self):
-		print self.addCounter
+		print str(self.addCounter)
 		
 	def printFind(self):
-		print self.findCounter
+		print str(self.findCounter)
 		
 	def show(self, num):
 			#CmdStruct(self.show,num)
