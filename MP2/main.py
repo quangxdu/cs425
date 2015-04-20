@@ -25,29 +25,29 @@ while (continue_looping):
 		if(message[0] ==  "join"):
 			coordinator.addNode(int(message[1]))
 			sys.stdout.write("join complete")
-			counter++
+			counter += 1
 					
 		if(message[0] == "find"):
 			temp = coordinator.findKey(int(message[1]),int(message[2]))
 			print temp
 			sys.stdout.write("find complete")
-			counter++
+			counter += 1
 			
 		if(message[0] == "leave"):
 			coordinator.removeNode(int(message[1]))
 			sys.stdout.write("leave complete")
-			counter++
+			counter += 1
 
 		if(message[0] == "show"):
 			if(message[1] == "all"):
 				if(writeback):
 					f.write(coordinator.showAll())
-				else
+				else:
 					coordinator.showAll()
 			else:
 				if(writeback):
-					f.write(coordinator.show(int(message[1]))
-				else
+					f.write(coordinator.show(int(message[1])))
+				else:
 					coordinator.show(int(message[1]))
 			sys.stdout.write("show complete")
 		if(message[0] == "quit"):
