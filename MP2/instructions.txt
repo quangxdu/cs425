@@ -1,0 +1,8 @@
+To compile:
+Our code is written in python, so compile the code as normal for python programs. 
+
+To run:
+python main.py -g <FILENAME>
+
+where <FILENAME> is the name of the output file to write to. 
+When you are done running the program, type "quit" to exit. 
