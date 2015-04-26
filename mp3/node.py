@@ -5,18 +5,20 @@ Created on Apr 25, 2015
 '''
 
 import  Queue
+from cs425.mp3.mutex import cs_int
 
 class node:
     neighbors = []
+    cs_int = 0
+    next_req = 0
     
-    def __init__(self, node_num, neighbor1, neighbor2, neighbor3, neighbor4):
-        self.neighbors.append(node_num)
-        self.neighbors.append(neighbor1)
-        self.neighbors.append(neighbor2)
-        self.neighbors.append(neighbor3)
-        self.neighbors.append(neighbor4)
 
+    
+    def __init__(self, node_num, cs_int, next_req):
+        for i in range(0, 5):
+            self.neighbors.append(node_num[i])
+        self.cs_int = cs_int
+        self.next_req = next_req
+        
     def begin
         while(True):
-
-    
