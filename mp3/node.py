@@ -4,11 +4,12 @@ Created on Apr 25, 2015
 @author: Kevin
 '''
 
-import  Queue
+import  Queue,Thread
 from cs425.mp3.mutex import cs_int
 
-class node:
-    queues = []
+
+class node(Thread):
+    neighbors = []
     cs_int = 0
     next_req = 0
     value = 0
@@ -23,5 +24,5 @@ class node:
         self.cs_int = cs_int
         self.next_req = next_req
         
-    def begin
+    def run(self):
         while(True):
