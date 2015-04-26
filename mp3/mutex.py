@@ -40,7 +40,7 @@ n7 = node.node(7,nodelist7,cs_int,next_req,option)
 n8 = node.node(8,nodelist8,cs_int,next_req,option)
 n9 = node.node(9,nodelist9,cs_int,next_req,option)
 
-nodelist = {n1,n2,n3,n4,n5,n6,n7,n8,n9}
+nodelist = [n1,n2,n3,n4,n5,n6,n7,n8,n9]
 for u in nodelist:
     u.start()
 while(True): #run until tot_exec_time passes
