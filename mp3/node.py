@@ -23,6 +23,6 @@ class node(Thread):
             self.neighbors.append(list[i])
         self.cs_int = cs_int
         self.next_req = next_req
-        
+
     def run(self):
         while(True):
