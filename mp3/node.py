@@ -15,3 +15,8 @@ class node:
         self.neighbors.append(neighbor2)
         self.neighbors.append(neighbor3)
         self.neighbors.append(neighbor4)
+
+    def begin
+        while(True):
+
+    
