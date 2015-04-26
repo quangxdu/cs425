@@ -30,14 +30,18 @@ nodelist7= {q7,q8,q9,q1,q4}
 nodelist8= {q8,q7,q9,q2,q5}
 nodelist9= {q9,q7,q8,q3,q6}
 
-n1 = node.node(nodelist1,cs_int,next_req)
-n2 = node.node(nodelist2,cs_int,next_req)
-n3 = node.node(nodelist3,cs_int,next_req)
-n4 = node.node(nodelist4,cs_int,next_req)
-n5 = node.node(nodelist5,cs_int,next_req)
-n6 = node.node(nodelist6,cs_int,next_req)
-n7 = node.node(nodelist7,cs_int,next_req)
-n8 = node.node(nodelist8,cs_int,next_req)
-n9 = node.node(nodelist9,cs_int,next_req)
+n1 = node.node(1,nodelist1,cs_int,next_req,option)
+n2 = node.node(2,nodelist2,cs_int,next_req,option)
+n3 = node.node(3,nodelist3,cs_int,next_req,option)
+n4 = node.node(4,nodelist4,cs_int,next_req,option)
+n5 = node.node(5,nodelist5,cs_int,next_req,option)
+n6 = node.node(6,nodelist6,cs_int,next_req,option)
+n7 = node.node(7,nodelist7,cs_int,next_req,option)
+n8 = node.node(8,nodelist8,cs_int,next_req,option)
+n9 = node.node(9,nodelist9,cs_int,next_req,option)
 
 nodelist = {n1,n2,n3,n4,n5,n6,n7,n8,n9}
+for u in nodelist:
+    u.start()
+while(True): #run until tot_exec_time passes
+    pass
